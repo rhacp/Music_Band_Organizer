@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -34,6 +36,15 @@ public class UserServiceImpl implements UserService{
         log.info("User {} : {} inserted in db.", savedUser.getId(), savedUser.getEmail());
 
         return modelMapper.map(savedUser, UserDTO.class);
+    }
+
+    @Override
+    public List<UserDTO> getAllUsers() {
+        List<User> userList = userRepository.findAll();
+
+        return userList.stream()
+                .map(user -> modelMapper.map(user, UserDTO.class))
+                .toList();
     }
 
     private static Integer calculateAge(LocalDate birthday) {
