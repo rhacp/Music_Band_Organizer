@@ -29,7 +29,7 @@ public class GlobalExceptionHandler {
         return getResponse(e, HttpStatus.CONFLICT);
     }
 
-    @ExceptionHandler(UserAlreadyExistsException.class)
+    @ExceptionHandler(BandAlreadyExistsException.class)
     public ResponseEntity<Object> handleBandAlreadyExistsException(BandAlreadyExistsException e) {
         return getResponse(e, HttpStatus.CONFLICT);
     }
