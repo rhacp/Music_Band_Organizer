@@ -9,4 +9,8 @@ public interface UserService {
     UserDTO createUser(UserDTO userDTO);
 
     List<UserDTO> getAllUsers();
+
+    UserDTO getUserById(Long userId);
+
+    String deleteUserById (Long userId);
 }

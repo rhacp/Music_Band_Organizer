@@ -1,6 +1,7 @@
 package com.anghel.music_band_organizer.controllers;
 
 import com.anghel.music_band_organizer.models.dtos.UserDTO;
+import com.anghel.music_band_organizer.models.entities.User;
 import com.anghel.music_band_organizer.services.user.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -24,5 +25,15 @@ public class UserController {
     @GetMapping
     public ResponseEntity<List<UserDTO>> getUsers() {
         return ResponseEntity.ok(userService.getAllUsers());
+    }
+
+    @GetMapping("/{userId}")
+    public ResponseEntity<UserDTO> getUserById(@PathVariable Long userId) {
+        return ResponseEntity.ok(userService.getUserById(userId));
+    }
+
+    @DeleteMapping("/{userId}")
+    public ResponseEntity<String> deleteUserById(@PathVariable Long userId) {
+        return ResponseEntity.ok(userService.deleteUserById(userId));
     }
 }

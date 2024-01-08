@@ -1,6 +1,7 @@
 package com.anghel.music_band_organizer.services.user;
 
 import com.anghel.music_band_organizer.exceptions.user.UserAlreadyExistsException;
+import com.anghel.music_band_organizer.exceptions.user.UserNotFoundException;
 import com.anghel.music_band_organizer.models.dtos.UserDTO;
 import com.anghel.music_band_organizer.models.entities.User;
 import com.anghel.music_band_organizer.repository.UserRepository;
@@ -24,5 +25,14 @@ public class UserServiceValidationImpl implements UserServiceValidation{
         if (userFound != null) {
             throw new UserAlreadyExistsException("A user with the mail " + userDTO.getEmail() + " already exists.");
         }
+    }
+
+    @Override
+    public User getValidUser(Long userId, String methodName) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new UserNotFoundException("User with the id " + userId + " not found."));
+        log.info("User with the id {} retrieved. method: {}", userId, methodName);
+
+        return user;
     }
 }

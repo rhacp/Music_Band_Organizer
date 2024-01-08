@@ -2,6 +2,7 @@ package com.anghel.music_band_organizer.exceptions;
 
 import com.anghel.music_band_organizer.exceptions.band.BandAlreadyExistsException;
 import com.anghel.music_band_organizer.exceptions.user.UserAlreadyExistsException;
+import com.anghel.music_band_organizer.exceptions.user.UserNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -32,6 +33,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(BandAlreadyExistsException.class)
     public ResponseEntity<Object> handleBandAlreadyExistsException(BandAlreadyExistsException e) {
         return getResponse(e, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<Object> handleUserNotFoundException(UserNotFoundException e) {
+        return getResponse(e, HttpStatus.NOT_FOUND);
     }
 
     private ResponseEntity<Object> getResponse(RuntimeException e, HttpStatus httpStatus) {
