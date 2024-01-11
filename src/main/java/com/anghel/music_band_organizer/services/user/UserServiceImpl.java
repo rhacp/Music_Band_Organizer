@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService{
         User user = modelMapper.map(userDTO, User.class);
         user.setAge(calculateAge(user.getBirthday()));
         User savedUser = userRepository.save(user);
-        log.info("User {} : {} inserted in db.", savedUser.getId(), savedUser.getEmail());
+        log.info("User {} : {} inserted in db. Method: {}", savedUser.getId(), savedUser.getEmail(), "createUser");
 
         return modelMapper.map(savedUser, UserDTO.class);
     }
@@ -50,7 +50,6 @@ public class UserServiceImpl implements UserService{
     @Override
     public UserDTO getUserById(Long userId) {
         User user = userServiceValidation.getValidUser(userId, "getUserById");
-        log.info("User with the id {} retrieved. Method: {}.", userId, "getUserById");
 
         return modelMapper.map(user, UserDTO.class);
     }
@@ -60,7 +59,7 @@ public class UserServiceImpl implements UserService{
         userServiceValidation.getValidUser(userId, "deleteUserById");
 
         userRepository.deleteById(userId);
-        log.info("User with id {} deleted.", userId);
+        log.info("User with id {} deleted. Method: {}", userId, "deleteUserById");
 
         return "User with id " + userId + " deleted.";
     }

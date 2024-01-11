@@ -15,6 +15,18 @@ public class Band {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "band_name", unique = true)
+    private String bandName;
+
+    @Column(name = "band_description")
+    private String bandDescription;
+
+    @OneToMany(mappedBy = "band")
+    private List<Rehearsal> rehearsalList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "band")
+    private List<Post> postList = new ArrayList<>();
+
     @ManyToMany(mappedBy = "bandList")
     private List<User> userList = new ArrayList<>();
 }
