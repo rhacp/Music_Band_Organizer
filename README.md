@@ -38,7 +38,7 @@ Musicians will be able to find other users, evaluate them based on their past ex
 ### Rehearsal
 
 - users part of a band should be able to plan rehearsals;
-- rehearsals shuold have a band assigned, a starting date and time and a duration in hours;
+- rehearsals shuold have a band assigned, a starting date and time, a state (`DUE`, `DONE`) and a duration in hours;
 
 ---
 
