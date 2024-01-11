@@ -21,10 +21,10 @@ public class Band {
     @Column(name = "band_description")
     private String bandDescription;
 
-    @OneToMany(mappedBy = "band")
+    @OneToMany(mappedBy = "rehearsalBand")
     private List<Rehearsal> rehearsalList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "band")
+    @OneToMany(mappedBy = "postBand")
     private List<Post> postList = new ArrayList<>();
 
     @ManyToMany(mappedBy = "bandList")

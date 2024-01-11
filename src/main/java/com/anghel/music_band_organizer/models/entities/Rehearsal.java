@@ -1,5 +1,6 @@
 package com.anghel.music_band_organizer.models.entities;
 
+import com.anghel.music_band_organizer.utils.enums.State;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -14,13 +15,16 @@ public class Rehearsal {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "time")
-    private LocalDateTime time;
+    @Column(name = "rehearsal_state")
+    private State rehearsalState;
 
-    @Column(name = "duration_hours")
-    private Integer durationHours;
+    @Column(name = "rehearsal_time")
+    private LocalDateTime rehearsalTime;
+
+    @Column(name = "rehearsal_duration_hours")
+    private Integer rehearsalDurationHours;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "band_id")
-    private Band band;
+    private Band rehearsalBand;
 }

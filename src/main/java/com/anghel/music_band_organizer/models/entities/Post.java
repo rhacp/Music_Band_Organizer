@@ -13,12 +13,12 @@ public class Post {
     private Long id;
 
     @Column(name = "post_title")
-    private String title;
+    private String postTitle;
 
     @Column(name = "post_description")
-    private String description;
+    private String postDescription;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "band_id")
-    private Band band;
+    private Band postBand;
 }
