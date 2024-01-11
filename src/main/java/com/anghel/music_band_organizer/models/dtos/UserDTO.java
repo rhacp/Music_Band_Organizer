@@ -1,7 +1,6 @@
 package com.anghel.music_band_organizer.models.dtos;
 
 import com.anghel.music_band_organizer.models.entities.Band;
-import com.anghel.music_band_organizer.utils.enums.Role;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -31,8 +30,6 @@ public class UserDTO {
     private LocalDate birthday;
 
     private Integer age;
-
-    private Role role;
 
     @NotBlank
     @Email
