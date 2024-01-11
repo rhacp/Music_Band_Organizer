@@ -1,5 +1,6 @@
 package com.anghel.music_band_organizer.models.entities;
 
+import com.anghel.music_band_organizer.utils.enums.Role;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -34,6 +35,10 @@ public class User {
     private String email;
 
     @ElementCollection
+    @CollectionTable(name = "user_roles", @joinColumns = @JoinColumn(name = "user_id"))
+    private List<Role> role;
+
+    @ElementCollection
     @CollectionTable(name = "user_past_experience",
             joinColumns = @JoinColumn(name = "user_id")
     )
@@ -48,12 +53,4 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "band_id")
     )
     private List<Band> bandList = new ArrayList<>();
-
-    @ElementCollection
-    @CollectionTable(name = "user_band_role",
-            joinColumns = @JoinColumn(name = "user_id")
-    )
-    @MapKeyColumn(name = "user_name")
-    @Column(name = "band_role")
-    private Map<String, String> bandRole = new LinkedHashMap<>();
 }
