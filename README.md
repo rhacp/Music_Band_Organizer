@@ -15,6 +15,39 @@ Board regarding the music band organizer Java app.
 
 # Music Band Organizer
 
-A collaborative platform for music bands to manage their repertoire, schedule rehearsals, and organize album releases.
+A collaborative platform for musicians to meet, create bands, manage their repertoire and rehearsals, and release albums.
+
+Musicians will be able to find other users, evaluate them based on their past experience, then message them to organize gigs and rehearsals.
+
+---
+
+### User
+
+- users should be able to create accounts/ profiles with `name`, `description`, `birthday`, `age` and `past experience`;
+- the `past experience` will include pairs of instrument and a short description to represent his current level;
+- the `email` attribute should be unique;
+
+---
+
+### Band
+
+- users should be able to create bands, then add other members;
+- bands should have a dedicated chat;
+- the `band_name` attribute should be unique;
+
+---
+
+### Rehearsal
+
+- users part of a band should be able to plan rehearsals;
+- rehearsals shuold have a band assigned, a starting date and time and a duration in hours;
+
+---
+
+### Post
+
+- user should be able to release their music/ albums in posts that other users will be able to see;
+- posts should include `title` and `description` and they should be linked to a band;
+- possible integration with OpenAI: based on the `band_name`, `band_description` and `post_title`, the AI should be able to provide the band with an automatic basic description for the release;
 
 ---
