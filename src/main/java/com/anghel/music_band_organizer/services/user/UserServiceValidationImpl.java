@@ -20,7 +20,7 @@ public class UserServiceValidationImpl implements UserServiceValidation{
 
     @Override
     public void validateUserAlreadyExists(UserDTO userDTO) {
-        User userFound = userRepository.findByEmail(userDTO.getEmail());
+        User userFound = userRepository.findUserByEmail(userDTO.getEmail());
 
         if (userFound != null) {
             throw new UserAlreadyExistsException("A user with the mail " + userDTO.getEmail() + " already exists.");
@@ -31,7 +31,7 @@ public class UserServiceValidationImpl implements UserServiceValidation{
     public User getValidUser(Long userId, String methodName) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new UserNotFoundException("User with the id " + userId + " not found."));
-        log.info("User with the id {} retrieved. method: {}", userId, methodName);
+        log.info("User with the id {} retrieved. Method: {}", userId, methodName);
 
         return user;
     }
