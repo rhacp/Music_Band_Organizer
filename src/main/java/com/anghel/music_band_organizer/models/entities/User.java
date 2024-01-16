@@ -30,7 +30,7 @@ public class User {
     @Column(name = "age")
     private Integer age;
 
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     private String email;
 
     @ElementCollection
@@ -55,5 +55,6 @@ public class User {
     )
     @MapKeyColumn(name = "user_role")
     @Column(name = "band_name")
+//    @JsonManagedReference(value = "user")
     private Map<String, String> bandRole = new LinkedHashMap<>();
 }

@@ -1,10 +1,8 @@
 package com.anghel.music_band_organizer.models.dtos;
 
+import com.anghel.music_band_organizer.models.entities.Band;
 import com.anghel.music_band_organizer.utils.enums.State;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -16,15 +14,13 @@ public class RehearsalDTO {
 
     private State state;
 
-    @NotBlank
+    @NotNull
     private LocalDateTime rehearsalTime;
 
-    @NotBlank
+    @NotNull
     @Min(1)
     @Max(9)
     private Integer rehearsalDurationHours;
 
-    @NotBlank
-    @Size(min = 3, max = 30, message = "must be between 3 and 30 characters")
-    private String rehearsalBand;
+    private Band rehearsalBand;
 }

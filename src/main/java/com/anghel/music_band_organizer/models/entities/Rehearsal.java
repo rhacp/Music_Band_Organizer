@@ -1,6 +1,7 @@
 package com.anghel.music_band_organizer.models.entities;
 
 import com.anghel.music_band_organizer.utils.enums.State;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -25,6 +26,7 @@ public class Rehearsal {
     private Integer rehearsalDurationHours;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "band_id")
+    @JoinColumn(name = "rehersal_band_id")
+    @JsonBackReference(value = "rehearsal")
     private Band rehearsalBand;
 }

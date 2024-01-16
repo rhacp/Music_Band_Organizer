@@ -1,5 +1,6 @@
 package com.anghel.music_band_organizer.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -18,7 +19,10 @@ public class Post {
     @Column(name = "post_description")
     private String postDescription;
 
+    //genre
+
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "band_id")
+    @JoinColumn(name = "post_band_id")
+    @JsonBackReference(value = "post")
     private Band postBand;
 }
