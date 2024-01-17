@@ -15,7 +15,7 @@ Board regarding the music band organizer Java app.
 
 ---
 
-A collaborative platform for musicians to meet, create bands, manage their repertoire and rehearsals, and release albums.
+A collaborative platform for musicians to meet, create bands, manage their rehearsals, and release albums.
 
 Musicians will be able to find other users, evaluate them based on their past experience, then message them to organize gigs and rehearsals.
 
