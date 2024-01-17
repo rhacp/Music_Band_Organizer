@@ -9,6 +9,8 @@ import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Slf4j
 @Component
 public class RehearsalServiceValidationImpl implements RehearsalServiceValidation{
@@ -20,11 +22,10 @@ public class RehearsalServiceValidationImpl implements RehearsalServiceValidatio
     @Transactional
     @Override
     public void validateRehearsalAlreadyExists(RehearsalDTO rehearsalDTO) {
-        // dynamic query to get rehearsal by date and time;
-        Rehearsal rehearsal = rehearsalRepository.findRehearsalByRehearsalDate(rehearsalDTO.getRehearsalDate());
+        List<Rehearsal> rehearsalList = rehearsalRepository.findFilteredRehearsal(rehearsalDTO.getId(), rehearsalDTO.getRehearsalDate(), rehearsalDTO.getRehearsalTime());
 
-        if (rehearsal != null) {
-            throw new RehearsalAlreadyExistsException("A rehearsal with the date + " + rehearsal.getRehearsalDate() + " and time " + rehearsal.getRehearsalTime() + " already exists.");
+        if (!rehearsalList.isEmpty()) {
+            throw new RehearsalAlreadyExistsException("A rehearsal with the date " + rehearsalDTO.getRehearsalDate() + " and time " + rehearsalDTO.getRehearsalTime() + " already exists.");
         }
     }
 

@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Repository
-public interface RehearsalRepository extends JpaRepository<Rehearsal, Long> {
+public interface RehearsalRepository extends JpaRepository<Rehearsal, Long>, CustomRehearsalRepository {
 
     Rehearsal findRehearsalById(Long rehearsalId);
 

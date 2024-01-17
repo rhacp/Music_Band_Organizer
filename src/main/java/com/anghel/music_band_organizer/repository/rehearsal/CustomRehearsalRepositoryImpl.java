@@ -30,10 +30,10 @@ public class CustomRehearsalRepositoryImpl implements CustomRehearsalRepository{
             predicates.add(cb.equal(rehearsal.get("id"), rehearsalId));
         }
         if (rehearsalDate != null) {
-            predicates.add(cb.equal(rehearsal.get("rehearsal_date"), rehearsalDate));
+            predicates.add(cb.equal(rehearsal.get("rehearsalDate"), rehearsalDate));
         }
         if (rehearsalTime != null) {
-            predicates.add(cb.equal(rehearsal.get("rehearsal_time"), rehearsalTime));
+            predicates.add(cb.equal(rehearsal.get("rehearsalTime"), rehearsalTime));
         }
 
         cq.where(predicates.toArray(new Predicate[0]));
