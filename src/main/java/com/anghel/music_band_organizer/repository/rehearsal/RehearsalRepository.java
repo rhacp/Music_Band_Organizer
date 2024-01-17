@@ -15,4 +15,6 @@ public interface RehearsalRepository extends JpaRepository<Rehearsal, Long>, Cus
     Rehearsal findRehearsalByRehearsalDate(LocalDate rehearsalDate);
 
     Rehearsal findRehearsalByRehearsalTime(LocalDateTime rehearsalTime);
+
+    Rehearsal findByRehearsalDateAndRehearsalTime(LocalDate rehearsalDate, LocalDateTime rehearsalTime);
 }

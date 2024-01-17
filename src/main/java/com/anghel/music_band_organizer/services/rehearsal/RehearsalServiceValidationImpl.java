@@ -22,6 +22,7 @@ public class RehearsalServiceValidationImpl implements RehearsalServiceValidatio
     @Transactional
     @Override
     public void validateRehearsalAlreadyExists(RehearsalDTO rehearsalDTO) {
+        //Rehearsal rehearsal = rehearsalRepository.findByDateAndTime();
         List<Rehearsal> rehearsalList = rehearsalRepository.findFilteredRehearsal(rehearsalDTO.getId(), rehearsalDTO.getRehearsalDate(), rehearsalDTO.getRehearsalTime());
 
         if (!rehearsalList.isEmpty()) {

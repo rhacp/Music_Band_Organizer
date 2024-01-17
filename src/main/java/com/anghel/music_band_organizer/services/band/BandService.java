@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface BandService {
 
-    BandDTO createBand(BandDTO bandDTO);
+    BandDTO createBand(BandDTO bandDTO, Long userId);
 
     List<BandDTO> getAllBands();
 
