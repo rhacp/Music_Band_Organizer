@@ -19,17 +19,15 @@ public class UserDTO {
     private Long id;
 
     @NotBlank
-    @Size(min = 3, max = 30, message = "must be between 3 and 30 characters")
+    @Size(min = 3, max = 30, message = "Must be between 3 and 30 characters.")
     private String firstName;
 
     @NotBlank
-    @Size(min = 3, max = 30, message = "must be between 3 and 30 characters")
+    @Size(min = 3, max = 30, message = "Must be between 3 and 30 characters.")
     private String lastName;
 
     @NotNull
     private LocalDate birthday;
-
-    private Integer age;
 
     @NotBlank
     @Email

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -18,6 +19,9 @@ public class Rehearsal {
 
     @Column(name = "rehearsal_state")
     private State rehearsalState;
+
+    @Column(name = "rehearsal_date")
+    private LocalDate rehearsalDate;
 
     @Column(name = "rehearsal_time")
     private LocalDateTime rehearsalTime;

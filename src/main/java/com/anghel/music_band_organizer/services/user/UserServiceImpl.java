@@ -2,13 +2,12 @@ package com.anghel.music_band_organizer.services.user;
 
 import com.anghel.music_band_organizer.models.dtos.UserDTO;
 import com.anghel.music_band_organizer.models.entities.User;
-import com.anghel.music_band_organizer.repository.UserRepository;
+import com.anghel.music_band_organizer.repository.user.UserRepository;
+import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 @Slf4j
@@ -25,18 +24,19 @@ public class UserServiceImpl implements UserService{
         this.modelMapper = modelMapper;
     }
 
+    @Transactional
     @Override
     public UserDTO createUser(UserDTO userDTO) {
         userServiceValidation.validateUserAlreadyExists(userDTO);
 
         User user = modelMapper.map(userDTO, User.class);
-        user.setAge(calculateAge(user.getBirthday()));
         User savedUser = userRepository.save(user);
         log.info("User {} : {} inserted in db. Method: {}", savedUser.getId(), savedUser.getEmail(), "createUser");
 
         return modelMapper.map(savedUser, UserDTO.class);
     }
 
+    @Transactional
     @Override
     public List<UserDTO> getAllUsers() {
         List<User> userList = userRepository.findAll();
@@ -47,6 +47,7 @@ public class UserServiceImpl implements UserService{
                 .toList();
     }
 
+    @Transactional
     @Override
     public UserDTO getUserById(Long userId) {
         User user = userServiceValidation.getValidUser(userId, "getUserById");
@@ -54,6 +55,7 @@ public class UserServiceImpl implements UserService{
         return modelMapper.map(user, UserDTO.class);
     }
 
+    @Transactional
     @Override
     public String deleteUserById(Long userId) {
         userServiceValidation.getValidUser(userId, "deleteUserById");
@@ -64,8 +66,7 @@ public class UserServiceImpl implements UserService{
         return "User with id " + userId + " deleted.";
     }
 
-    private static Integer calculateAge(LocalDate birthday) {
-//        return (int)((LocalDate.now().toEpochDay() - birthday.toEpochDay()) / 365);
-        return (int)(ChronoUnit.YEARS.between(birthday, LocalDate.now()));
-    }
+//    private static Integer calculateAge(LocalDate birthday) {
+//        return (int)(ChronoUnit.YEARS.between(birthday, LocalDate.now()));
+//    }
 }

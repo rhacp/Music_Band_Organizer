@@ -3,6 +3,7 @@ package com.anghel.music_band_organizer.services.band;
 import com.anghel.music_band_organizer.models.dtos.BandDTO;
 import com.anghel.music_band_organizer.models.entities.Band;
 import com.anghel.music_band_organizer.repository.BandRepository;
+import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,7 @@ public class BandServiceImpl implements BandService{
         this.modelMapper = modelMapper;
     }
 
+    @Transactional
     @Override
     public BandDTO createBand(BandDTO bandDTO) {
         bandServiceValidation.validateBandAlreadyExists(bandDTO);
@@ -34,6 +36,7 @@ public class BandServiceImpl implements BandService{
         return modelMapper.map(savedBand, BandDTO.class);
     }
 
+    @Transactional
     @Override
     public List<BandDTO> getAllBands() {
         List<Band> bandList = bandRepository.findAll();
@@ -44,6 +47,7 @@ public class BandServiceImpl implements BandService{
                 .toList();
     }
 
+    @Transactional
     @Override
     public BandDTO getBandById(Long bandId) {
         Band band = bandServiceValidation.getValidBand(bandId, "getBandById");
@@ -51,6 +55,7 @@ public class BandServiceImpl implements BandService{
         return modelMapper.map(band, BandDTO.class);
     }
 
+    @Transactional
     @Override
     public String deleteBandById(Long bandId) {
         bandServiceValidation.getValidBand(bandId, "deleteBandById");

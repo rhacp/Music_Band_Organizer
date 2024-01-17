@@ -27,9 +27,6 @@ public class User {
     @Column(name = "birthday")
     private LocalDate birthday;
 
-    @Column(name = "age")
-    private Integer age;
-
     @Column(name = "email", unique = true)
     private String email;
 
@@ -55,6 +52,5 @@ public class User {
     )
     @MapKeyColumn(name = "user_role")
     @Column(name = "band_name")
-//    @JsonManagedReference(value = "user")
     private Map<String, String> bandRole = new LinkedHashMap<>();
 }

@@ -1,4 +1,4 @@
-package com.anghel.music_band_organizer.repository;
+package com.anghel.music_band_organizer.repository.user;
 
 import com.anghel.music_band_organizer.models.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;

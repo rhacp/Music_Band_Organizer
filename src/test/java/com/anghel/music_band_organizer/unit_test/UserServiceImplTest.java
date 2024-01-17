@@ -2,7 +2,7 @@ package com.anghel.music_band_organizer.unit_test;
 
 import com.anghel.music_band_organizer.models.dtos.UserDTO;
 import com.anghel.music_band_organizer.models.entities.User;
-import com.anghel.music_band_organizer.repository.UserRepository;
+import com.anghel.music_band_organizer.repository.user.UserRepository;
 import com.anghel.music_band_organizer.services.user.UserServiceImpl;
 import com.anghel.music_band_organizer.services.user.UserServiceValidationImpl;
 import org.junit.jupiter.api.Test;

@@ -19,7 +19,8 @@ public class Post {
     @Column(name = "post_description")
     private String postDescription;
 
-    //genre
+    @Column(name = "post_genre")
+    private String postGenre;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "post_band_id")

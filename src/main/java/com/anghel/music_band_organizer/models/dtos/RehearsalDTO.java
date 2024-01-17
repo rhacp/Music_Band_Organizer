@@ -5,6 +5,7 @@ import com.anghel.music_band_organizer.utils.enums.State;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -13,6 +14,9 @@ public class RehearsalDTO {
     private Long id;
 
     private State state;
+
+    @NotNull
+    private LocalDate rehearsalDate;
 
     @NotNull
     private LocalDateTime rehearsalTime;
