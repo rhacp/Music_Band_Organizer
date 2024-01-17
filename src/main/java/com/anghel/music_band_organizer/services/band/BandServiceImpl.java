@@ -2,7 +2,9 @@ package com.anghel.music_band_organizer.services.band;
 
 import com.anghel.music_band_organizer.models.dtos.BandDTO;
 import com.anghel.music_band_organizer.models.entities.Band;
+import com.anghel.music_band_organizer.models.entities.User;
 import com.anghel.music_band_organizer.repository.BandRepository;
+import com.anghel.music_band_organizer.services.user.UserService;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -17,19 +19,23 @@ public class BandServiceImpl implements BandService{
     private final BandRepository bandRepository;
     private final BandServiceValidation bandServiceValidation;
     private final ModelMapper modelMapper;
+    private final UserService userService;
 
-    public BandServiceImpl(BandRepository bandRepository, BandServiceValidation bandServiceValidation, ModelMapper modelMapper) {
+    public BandServiceImpl(BandRepository bandRepository, BandServiceValidation bandServiceValidation, ModelMapper modelMapper, UserService userService) {
         this.bandRepository = bandRepository;
         this.bandServiceValidation = bandServiceValidation;
         this.modelMapper = modelMapper;
+        this.userService = userService;
     }
 
     @Transactional
     @Override
-    public BandDTO createBand(BandDTO bandDTO) {
+    public BandDTO createBand(BandDTO bandDTO, Long userId) {
         bandServiceValidation.validateBandAlreadyExists(bandDTO);
+        User user = userService.addUserBandAndRole(userId, bandDTO.getBandName());
 
         Band band = modelMapper.map(bandDTO, Band.class);
+        band.getUserList().add(user);
         Band savedBand = bandRepository.save(band);
         log.info("Band with id {} inserted in db. Method: {}", savedBand.getId(), "createBand");
 

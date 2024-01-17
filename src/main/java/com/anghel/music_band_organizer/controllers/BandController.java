@@ -18,9 +18,9 @@ public class BandController {
         this.bandService = bandService;
     }
 
-    @PostMapping
-    public ResponseEntity<BandDTO> createBand(@Valid @RequestBody BandDTO bandDTO) {
-        return ResponseEntity.ok(bandService.createBand(bandDTO));
+    @PostMapping("/{userId}")
+    public ResponseEntity<BandDTO> createBand(@Valid @RequestBody BandDTO bandDTO, @PathVariable Long userId) {
+        return ResponseEntity.ok(bandService.createBand(bandDTO, userId));
     }
 
     @GetMapping

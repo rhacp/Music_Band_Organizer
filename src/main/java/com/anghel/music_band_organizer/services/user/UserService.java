@@ -17,4 +17,6 @@ public interface UserService {
     String deleteUserById(Long userId);
 
     List<UserDTO> getFilteredUsers(UserFilterDTO userFilterDTO);
+
+    User addUserBandAndRole(Long userId, String bandName);
 }
