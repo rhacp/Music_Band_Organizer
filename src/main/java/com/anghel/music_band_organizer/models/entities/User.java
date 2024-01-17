@@ -27,10 +27,7 @@ public class User {
     @Column(name = "birthday")
     private LocalDate birthday;
 
-    @Column(name = "age")
-    private Integer age;
-
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     private String email;
 
     @ElementCollection
@@ -53,7 +50,7 @@ public class User {
     @CollectionTable(name = "user_band_role",
             joinColumns = @JoinColumn(name = "user_id")
     )
-    @MapKeyColumn(name = "user_name")
-    @Column(name = "band_role")
+    @MapKeyColumn(name = "user_role")
+    @Column(name = "band_name")
     private Map<String, String> bandRole = new LinkedHashMap<>();
 }

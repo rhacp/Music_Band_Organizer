@@ -1,5 +1,7 @@
 package com.anghel.music_band_organizer.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -21,12 +23,15 @@ public class Band {
     @Column(name = "band_description")
     private String bandDescription;
 
-    @OneToMany(mappedBy = "band")
+    @OneToMany(mappedBy = "rehearsalBand")
+    @JsonManagedReference(value = "rehearsal")
     private List<Rehearsal> rehearsalList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "band")
+    @OneToMany(mappedBy = "postBand")
+    @JsonManagedReference(value = "post")
     private List<Post> postList = new ArrayList<>();
 
     @ManyToMany(mappedBy = "bandList")
+//    @JsonBackReference(value = "band")
     private List<User> userList = new ArrayList<>();
 }

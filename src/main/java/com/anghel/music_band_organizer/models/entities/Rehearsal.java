@@ -1,8 +1,11 @@
 package com.anghel.music_band_organizer.models.entities;
 
+import com.anghel.music_band_organizer.utils.enums.State;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -14,13 +17,20 @@ public class Rehearsal {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "time")
-    private LocalDateTime time;
+    @Column(name = "rehearsal_state")
+    private State rehearsalState;
 
-    @Column(name = "duration_hours")
-    private Integer durationHours;
+    @Column(name = "rehearsal_date")
+    private LocalDate rehearsalDate;
+
+    @Column(name = "rehearsal_time")
+    private LocalDateTime rehearsalTime;
+
+    @Column(name = "rehearsal_duration_hours")
+    private Integer rehearsalDurationHours;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "band_id")
-    private Band band;
+    @JoinColumn(name = "rehersal_band_id")
+    @JsonBackReference(value = "rehearsal")
+    private Band rehearsalBand;
 }

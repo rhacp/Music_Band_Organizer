@@ -2,6 +2,8 @@ package com.anghel.music_band_organizer.exceptions;
 
 import com.anghel.music_band_organizer.exceptions.band.BandAlreadyExistsException;
 import com.anghel.music_band_organizer.exceptions.band.BandNotFoundException;
+import com.anghel.music_band_organizer.exceptions.rehearsal.RehearsalAlreadyExistsException;
+import com.anghel.music_band_organizer.exceptions.rehearsal.RehearsalNotFoundException;
 import com.anghel.music_band_organizer.exceptions.user.UserAlreadyExistsException;
 import com.anghel.music_band_organizer.exceptions.user.UserNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -43,6 +45,16 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(BandNotFoundException.class)
     public ResponseEntity<Object> handleBandNotFoundException(BandNotFoundException e) {
+        return getResponse(e, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(RehearsalAlreadyExistsException.class)
+    public ResponseEntity<Object> handleRehearsalAlreadyExistsException(RehearsalAlreadyExistsException e) {
+        return getResponse(e, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(RehearsalNotFoundException.class)
+    public ResponseEntity<Object> handleRehearsalNotFoundException(RehearsalNotFoundException e) {
         return getResponse(e, HttpStatus.NOT_FOUND);
     }
 
