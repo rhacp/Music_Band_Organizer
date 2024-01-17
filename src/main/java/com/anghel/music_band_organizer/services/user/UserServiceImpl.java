@@ -1,6 +1,7 @@
 package com.anghel.music_band_organizer.services.user;
 
-import com.anghel.music_band_organizer.models.dtos.UserDTO;
+import com.anghel.music_band_organizer.models.dtos.user.UserDTO;
+import com.anghel.music_band_organizer.models.dtos.user.UserFilterDTO;
 import com.anghel.music_band_organizer.models.entities.User;
 import com.anghel.music_band_organizer.repository.user.UserRepository;
 import jakarta.transaction.Transactional;
@@ -12,7 +13,7 @@ import java.util.List;
 
 @Slf4j
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final UserServiceValidation userServiceValidation;
@@ -66,7 +67,28 @@ public class UserServiceImpl implements UserService{
         return "User with id " + userId + " deleted.";
     }
 
-//    private static Integer calculateAge(LocalDate birthday) {
+    @Override
+    public List<UserDTO> getFilteredUsers(UserFilterDTO userFilterDTO) {
+        if (userFilterDTO == null) {
+            return userRepository.findAll().stream()
+                    .map(user -> modelMapper.map(user, UserDTO.class))
+                    .toList();
+        }
+
+        List<UserDTO> userDTOList = userRepository.findFilteredUser(userFilterDTO.getId(), userFilterDTO.getFirstName(), userFilterDTO.getLastName(), userFilterDTO.getEmail(), userFilterDTO.getBirthday(), userFilterDTO.getPastExperience()).stream()
+                .map(user -> modelMapper.map(user, UserDTO.class))
+                .toList();
+
+        if (userFilterDTO.getPastExperience() != null) {
+            return userDTOList.stream()
+                    .filter(userDTO -> userDTO.getPastExperience().containsKey(userFilterDTO.getPastExperience()))
+                    .toList();
+        }
+
+        return userDTOList;
+    }
+
+    //    private static Integer calculateAge(LocalDate birthday) {
 //        return (int)(ChronoUnit.YEARS.between(birthday, LocalDate.now()));
 //    }
 }

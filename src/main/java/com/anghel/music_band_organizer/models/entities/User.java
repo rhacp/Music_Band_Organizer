@@ -34,7 +34,7 @@ public class User {
     @CollectionTable(name = "user_past_experience",
             joinColumns = @JoinColumn(name = "user_id")
     )
-    @MapKeyColumn(name = "user_name")
+    @MapKeyColumn(name = "user_instrument")
     @Column(name = "past_experience")
     private Map<String, String> pastExperience = new LinkedHashMap<>();
 
