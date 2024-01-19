@@ -1,5 +1,6 @@
 package com.anghel.music_band_organizer.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -38,12 +39,8 @@ public class User {
     @Column(name = "past_experience")
     private Map<String, String> pastExperience = new LinkedHashMap<>();
 
-    @ManyToMany
-    @JoinTable(
-            name = "user_band_list",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "band_id")
-    )
+    @ManyToMany(mappedBy = "userList")
+    @JsonBackReference(value = "band")
     private List<Band> bandList = new ArrayList<>();
 
     @ElementCollection

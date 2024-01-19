@@ -13,7 +13,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
@@ -62,7 +61,6 @@ class UserServiceImplTest {
         returnedUserDTO.setLastName("Anton");
         returnedUserDTO.setEmail("crin@gmail.com");
         returnedUserDTO.setBirthday(LocalDate.parse("1998-03-11"));
-        returnedUserDTO.setAge((int)ChronoUnit.YEARS.between(returnedUserDTO.getBirthday(), LocalDate.now()));
 
         when(modelMapper.map(returnedUserDTO, User.class)).thenReturn(user);
         when(modelMapper.map(savedUser, UserDTO.class)).thenReturn(returnedUserDTO);
