@@ -1,18 +1,16 @@
-package com.anghel.music_band_organizer.models;
+package com.anghel.music_band_organizer.services.OpenAI;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Service;
 
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+@Service
 @Data
-public class OpenAI {
+public class OpenAIImpl implements OpenAI {
 
     @Value("${api.url}")
     private String url;
