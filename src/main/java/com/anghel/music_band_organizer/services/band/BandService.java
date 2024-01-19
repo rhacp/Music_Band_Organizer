@@ -13,4 +13,6 @@ public interface BandService {
     BandDTO getBandById(Long bandId);
 
     String deleteBandById(Long bandId);
+
+    String generateBandDescription(Long bandId);
 }

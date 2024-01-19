@@ -2,6 +2,7 @@ package com.anghel.music_band_organizer.services.band;
 
 import com.anghel.music_band_organizer.models.dtos.BandDTO;
 import com.anghel.music_band_organizer.models.entities.Band;
+import com.anghel.music_band_organizer.models.OpenAI;
 import com.anghel.music_band_organizer.models.entities.User;
 import com.anghel.music_band_organizer.repository.BandRepository;
 import com.anghel.music_band_organizer.services.user.UserService;
@@ -20,12 +21,14 @@ public class BandServiceImpl implements BandService{
     private final BandServiceValidation bandServiceValidation;
     private final ModelMapper modelMapper;
     private final UserService userService;
+    private final OpenAI openAI;
 
-    public BandServiceImpl(BandRepository bandRepository, BandServiceValidation bandServiceValidation, ModelMapper modelMapper, UserService userService) {
+    public BandServiceImpl(BandRepository bandRepository, BandServiceValidation bandServiceValidation, ModelMapper modelMapper, UserService userService, OpenAI openAI) {
         this.bandRepository = bandRepository;
         this.bandServiceValidation = bandServiceValidation;
         this.modelMapper = modelMapper;
         this.userService = userService;
+        this.openAI = openAI;
     }
 
     @Transactional
@@ -70,5 +73,12 @@ public class BandServiceImpl implements BandService{
         log.info("Band with id {} deleted. Method: {}", bandId, "deleteBandById");
 
         return "Band with id " + bandId + " deleted.";
+    }
+
+    @Override
+    public String generateBandDescription(Long bandId) {
+        Band band = bandServiceValidation.getValidBand(bandId, "generateBandDescription");
+
+        return openAI.chatGPT("Please create a short description of my band based on my band name, which is: " + band.getBandName() + ". Please answer using up to 100 tokens.");
     }
 }

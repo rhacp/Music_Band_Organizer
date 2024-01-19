@@ -37,4 +37,9 @@ public class BandController {
     public ResponseEntity<String> deleteBandById(@PathVariable Long bandId) {
         return ResponseEntity.ok(bandService.deleteBandById(bandId));
     }
+
+    @PostMapping("/{bandId}/openAI")
+    public ResponseEntity<String> generateBandDescription(@PathVariable Long bandId) {
+        return ResponseEntity.ok(bandService.generateBandDescription(bandId));
+    }
 }
