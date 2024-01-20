@@ -1,4 +1,4 @@
-package com.anghel.music_band_organizer.models.dtos.user;
+package com.anghel.music_band_organizer.models.dtos;
 
 import com.anghel.music_band_organizer.models.entities.Band;
 import jakarta.validation.constraints.Email;
@@ -28,6 +28,14 @@ public class UserDTO {
 
     @NotNull
     private LocalDate birthday;
+
+    @NotBlank
+    @Size(min = 3, max = 30, message = "Must be between 3 and 30 characters.")
+    private String stageName;
+
+    @NotBlank
+    @Size(min = 3, max = 200, message = "must be between 3 and 30 characters")
+    private String description;
 
     @NotBlank
     @Email

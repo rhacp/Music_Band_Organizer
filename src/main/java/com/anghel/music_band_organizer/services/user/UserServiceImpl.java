@@ -1,7 +1,6 @@
 package com.anghel.music_band_organizer.services.user;
 
-import com.anghel.music_band_organizer.models.dtos.user.UserDTO;
-import com.anghel.music_band_organizer.models.dtos.user.UserFilterDTO;
+import com.anghel.music_band_organizer.models.dtos.UserDTO;
 import com.anghel.music_band_organizer.models.entities.User;
 import com.anghel.music_band_organizer.repository.user.UserRepository;
 import com.anghel.music_band_organizer.utils.enums.Role;
@@ -10,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Slf4j
@@ -68,22 +68,28 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserDTO> getFilteredUsers(UserFilterDTO userFilterDTO) {
-        if (userFilterDTO == null) {
+    public List<UserDTO> getFilteredUsers(Long userId,
+                                          String firstName,
+                                          String lastName,
+                                          String email,
+                                          LocalDate birthday,
+                                          String pastExperience,
+                                          String stageName) {
+        if (userId == null && firstName == null && lastName == null && email == null && birthday == null && pastExperience == null && stageName == null) {
             return userRepository.findAll().stream()
                     .map(user -> modelMapper.map(user, UserDTO.class))
                     .toList();
         }
 
-        List<UserDTO> userDTOList = userRepository.findFilteredUser(userFilterDTO.getId(), userFilterDTO.getFirstName(), userFilterDTO.getLastName(), userFilterDTO.getEmail(), userFilterDTO.getBirthday(), userFilterDTO.getPastExperience()).stream()
+        List<UserDTO> userDTOList = userRepository.findFilteredUser(userId, firstName, lastName, email, birthday, pastExperience, stageName).stream()
                 .map(user -> modelMapper.map(user, UserDTO.class))
                 .toList();
         log.info("Filtered user list retrieved from db. Method {}.", "getFilteredUsers");
 
 
-        if (userFilterDTO.getPastExperience() != null) {
+        if (pastExperience != null) {
             return userDTOList.stream()
-                    .filter(userDTO -> userDTO.getPastExperience().containsKey(userFilterDTO.getPastExperience()))
+                    .filter(userDTO -> userDTO.getPastExperience().containsKey(pastExperience))
                     .toList();
         }
 
@@ -101,8 +107,4 @@ public class UserServiceImpl implements UserService {
 
         return savedUser;
     }
-
-    //    private static Integer calculateAge(LocalDate birthday) {
-//        return (int)(ChronoUnit.YEARS.between(birthday, LocalDate.now()));
-//    }
 }

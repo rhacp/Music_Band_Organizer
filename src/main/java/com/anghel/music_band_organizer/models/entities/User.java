@@ -31,6 +31,12 @@ public class User {
     @Column(name = "email", unique = true)
     private String email;
 
+    @Column(name = "stage_name")
+    private String stageName;
+
+    @Column(name = "description")
+    private String description;
+
     @ElementCollection
     @CollectionTable(name = "user_past_experience",
             joinColumns = @JoinColumn(name = "user_id")
