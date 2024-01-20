@@ -1,4 +1,4 @@
-package com.anghel.music_band_organizer.services.OpenAI;
+package com.anghel.music_band_organizer.services.open_ai;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
@@ -60,7 +60,7 @@ public class OpenAIImpl implements OpenAI {
     private String extractMessageFromJSONResponse(String response) {
         int start = response.indexOf("content") + 11;
 
-        int end = response.indexOf("\"", start);
+        int end = response.indexOf("\"", start + 0);
 
         return response.substring(start, end);
     }
