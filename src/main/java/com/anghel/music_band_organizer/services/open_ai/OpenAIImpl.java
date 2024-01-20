@@ -1,15 +1,13 @@
 package com.anghel.music_band_organizer.services.open_ai;
 
-import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
 import java.net.HttpURLConnection;
-import java.net.URL;
+import java.net.URI;
 
 @Service
-@Data
 public class OpenAIImpl implements OpenAI {
 
     @Value("${api.url}")
@@ -23,33 +21,18 @@ public class OpenAIImpl implements OpenAI {
 
     public String chatGPT(String prompt) {
         try {
-            //Create the connection passing the url, apiKey. You basically prepare the call.
-            URL obj = new URL(url);
-            HttpURLConnection connection = (HttpURLConnection) obj.openConnection();
-            connection.setRequestMethod("POST");
-            connection.setRequestProperty("Authorization", "Bearer " + apiKey);
-            connection.setRequestProperty("Content-Type", "application/json");
-
-            // The request body. Here you pass the model.
-            String body = "{\"model\": \"" + model + "\", \"messages\": [{\"role\": \"user\", \"content\": \"" + prompt + "\"}]}";
-            connection.setDoOutput(true);
-            OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
-            writer.write(body);
-            writer.flush();
-            writer.close();
-
-            // Response from ChatGPT
-            BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            URI obj = URI.create(url);
+            BufferedReader br = getBufferedReader(prompt, obj);
             String line;
 
-            StringBuffer response = new StringBuffer();
+            StringBuilder response = new StringBuilder();
 
             while ((line = br.readLine()) != null) {
                 response.append(line);
             }
             br.close();
 
-            // calls the method to extract the message.
+            // Calls the method to extract the message.
             return extractMessageFromJSONResponse(response.toString());
 
         } catch (IOException e) {
@@ -57,10 +40,28 @@ public class OpenAIImpl implements OpenAI {
         }
     }
 
+    private BufferedReader getBufferedReader(String prompt, URI obj) throws IOException {
+        //Create the connection passing the url, apiKey. You prepare the call.
+        HttpURLConnection connection = (HttpURLConnection) obj.toURL().openConnection();
+        connection.setRequestMethod("POST");
+        connection.setRequestProperty("Authorization", "Bearer " + apiKey);
+        connection.setRequestProperty("Content-Type", "application/json");
+
+        // The request body. Here you pass the model.
+        String body = "{\"model\": \"" + model + "\", \"messages\": [{\"role\": \"user\", \"content\": \"" + prompt + "\"}]}";
+        connection.setDoOutput(true);
+        OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
+        writer.write(body);
+        writer.flush();
+        writer.close();
+
+        // Response from ChatGPT
+        return new BufferedReader(new InputStreamReader(connection.getInputStream()));
+    }
+
     private String extractMessageFromJSONResponse(String response) {
         int start = response.indexOf("content") + 11;
-
-        int end = response.indexOf("\"", start + 0);
+        int end = response.indexOf("\"", start);
 
         return response.substring(start, end);
     }

@@ -43,10 +43,6 @@ public class CustomUserRepositoryImpl implements CustomUserRepository{
         if (stageName != null) {
             predicates.add(cb.equal(user.get("stageName"), stageName));
         }
-// not working... but solved in the UserServiceImpl under getFilteredUsers
-//        if (pastExperience != null) {
-//            predicates.add(cb.isMember(pastExperience, user.get("pastExperience")));
-//        }
 
         cq.where(predicates.toArray(new Predicate[0]));
         return entityManager.createQuery(cq).getResultList();

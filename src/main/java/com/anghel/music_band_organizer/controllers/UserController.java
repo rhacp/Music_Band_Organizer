@@ -1,7 +1,6 @@
 package com.anghel.music_band_organizer.controllers;
 
-import com.anghel.music_band_organizer.models.dtos.user.UserDTO;
-import com.anghel.music_band_organizer.models.dtos.user.UserFilterDTO;
+import com.anghel.music_band_organizer.models.dtos.UserDTO;
 import com.anghel.music_band_organizer.services.user.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;

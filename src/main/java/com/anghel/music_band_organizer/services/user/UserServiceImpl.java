@@ -1,7 +1,6 @@
 package com.anghel.music_band_organizer.services.user;
 
-import com.anghel.music_band_organizer.models.dtos.user.UserDTO;
-import com.anghel.music_band_organizer.models.dtos.user.UserFilterDTO;
+import com.anghel.music_band_organizer.models.dtos.UserDTO;
 import com.anghel.music_band_organizer.models.entities.User;
 import com.anghel.music_band_organizer.repository.user.UserRepository;
 import com.anghel.music_band_organizer.utils.enums.Role;
@@ -108,8 +107,4 @@ public class UserServiceImpl implements UserService {
 
         return savedUser;
     }
-
-    //    private static Integer calculateAge(LocalDate birthday) {
-//        return (int)(ChronoUnit.YEARS.between(birthday, LocalDate.now()));
-//    }
 }
