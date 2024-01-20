@@ -30,6 +30,14 @@ public class UserDTO {
     private LocalDate birthday;
 
     @NotBlank
+    @Size(min = 3, max = 30, message = "Must be between 3 and 30 characters.")
+    private String stageName;
+
+    @NotBlank
+    @Size(min = 3, max = 200, message = "must be between 3 and 30 characters")
+    private String description;
+
+    @NotBlank
     @Email
     private String email;
 

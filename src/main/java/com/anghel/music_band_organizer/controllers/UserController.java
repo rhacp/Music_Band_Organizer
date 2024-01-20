@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -37,8 +38,14 @@ public class UserController {
         return ResponseEntity.ok(userService.deleteUserById(userId));
     }
 
-    @GetMapping("/filtered")
-    public ResponseEntity<List<UserDTO>> getFilteredUsers(@RequestBody UserFilterDTO userFilterDTO) {
-        return ResponseEntity.ok(userService.getFilteredUsers(userFilterDTO));
+    @GetMapping("/filter")
+    public ResponseEntity<List<UserDTO>> getFilteredUsers(@RequestParam(required = false) Long userId,
+                                                          @RequestParam(required = false) String firstName,
+                                                          @RequestParam(required = false) String lastName,
+                                                          @RequestParam(required = false) String email,
+                                                          @RequestParam(required = false) LocalDate birthday,
+                                                          @RequestParam(required = false) String pastExperience,
+                                                          @RequestParam(required = false) String stageName) {
+        return ResponseEntity.ok(userService.getFilteredUsers(userId, firstName, lastName, email, birthday, pastExperience, stageName));
     }
 }

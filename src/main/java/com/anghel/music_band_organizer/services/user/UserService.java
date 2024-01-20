@@ -1,9 +1,9 @@
 package com.anghel.music_band_organizer.services.user;
 
 import com.anghel.music_band_organizer.models.dtos.user.UserDTO;
-import com.anghel.music_band_organizer.models.dtos.user.UserFilterDTO;
 import com.anghel.music_band_organizer.models.entities.User;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface UserService {
@@ -16,7 +16,13 @@ public interface UserService {
 
     String deleteUserById(Long userId);
 
-    List<UserDTO> getFilteredUsers(UserFilterDTO userFilterDTO);
+    List<UserDTO> getFilteredUsers(Long userId,
+                                   String firstName,
+                                   String lastName,
+                                   String userEmail,
+                                   LocalDate userBirthday,
+                                   String pastExperience,
+                                   String userStageName);
 
     User addUserBandAndRole(Long userId, String bandName);
 }

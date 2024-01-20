@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Slf4j
@@ -68,22 +69,28 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserDTO> getFilteredUsers(UserFilterDTO userFilterDTO) {
-        if (userFilterDTO == null) {
+    public List<UserDTO> getFilteredUsers(Long userId,
+                                          String firstName,
+                                          String lastName,
+                                          String email,
+                                          LocalDate birthday,
+                                          String pastExperience,
+                                          String stageName) {
+        if (userId == null && firstName == null && lastName == null && email == null && birthday == null && pastExperience == null && stageName == null) {
             return userRepository.findAll().stream()
                     .map(user -> modelMapper.map(user, UserDTO.class))
                     .toList();
         }
 
-        List<UserDTO> userDTOList = userRepository.findFilteredUser(userFilterDTO.getId(), userFilterDTO.getFirstName(), userFilterDTO.getLastName(), userFilterDTO.getEmail(), userFilterDTO.getBirthday(), userFilterDTO.getPastExperience()).stream()
+        List<UserDTO> userDTOList = userRepository.findFilteredUser(userId, firstName, lastName, email, birthday, pastExperience, stageName).stream()
                 .map(user -> modelMapper.map(user, UserDTO.class))
                 .toList();
         log.info("Filtered user list retrieved from db. Method {}.", "getFilteredUsers");
 
 
-        if (userFilterDTO.getPastExperience() != null) {
+        if (pastExperience != null) {
             return userDTOList.stream()
-                    .filter(userDTO -> userDTO.getPastExperience().containsKey(userFilterDTO.getPastExperience()))
+                    .filter(userDTO -> userDTO.getPastExperience().containsKey(pastExperience))
                     .toList();
         }
 

@@ -17,5 +17,7 @@ public class UserFilterDTO {
 
     private String email;
 
+    private String stageName;
+
     private String pastExperience;
 }
