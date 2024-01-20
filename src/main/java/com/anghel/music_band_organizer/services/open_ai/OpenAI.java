@@ -1,4 +1,4 @@
-package com.anghel.music_band_organizer.services.OpenAI;
+package com.anghel.music_band_organizer.services.open_ai;
 
 public interface OpenAI {
 

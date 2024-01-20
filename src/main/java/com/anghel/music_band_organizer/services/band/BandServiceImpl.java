@@ -2,7 +2,7 @@ package com.anghel.music_band_organizer.services.band;
 
 import com.anghel.music_band_organizer.models.dtos.BandDTO;
 import com.anghel.music_band_organizer.models.entities.Band;
-import com.anghel.music_band_organizer.services.OpenAI.OpenAIImpl;
+import com.anghel.music_band_organizer.services.open_ai.OpenAIImpl;
 import com.anghel.music_band_organizer.models.entities.User;
 import com.anghel.music_band_organizer.repository.BandRepository;
 import com.anghel.music_band_organizer.services.user.UserService;
