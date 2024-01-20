@@ -20,9 +20,18 @@ public class OpenAIImpl implements OpenAI {
     private String model;
 
     public String chatGPT(String prompt) {
+        //Make the call.
+        BufferedReader br = getBufferedReader(prompt);
+
+        //Get the entire response as StringBuilder.
+        StringBuilder response = getJSONResponseFromBuffer(br);
+
+        //Extract the needed part.
+        return extractMessageFromJSONResponse(response.toString());
+        }
+
+    public StringBuilder getJSONResponseFromBuffer(BufferedReader br) {
         try {
-            URI obj = URI.create(url);
-            BufferedReader br = getBufferedReader(prompt, obj);
             String line;
 
             StringBuilder response = new StringBuilder();
@@ -32,34 +41,38 @@ public class OpenAIImpl implements OpenAI {
             }
             br.close();
 
-            // Calls the method to extract the message.
-            return extractMessageFromJSONResponse(response.toString());
+            return response;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public BufferedReader getBufferedReader(String prompt) {
+        try {
+            //Create the connection passing the url, apiKey. You prepare the call.
+            URI obj = URI.create(url);
+            HttpURLConnection connection = (HttpURLConnection) obj.toURL().openConnection();
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("Authorization", "Bearer " + apiKey);
+            connection.setRequestProperty("Content-Type", "application/json");
+
+            // The request body. Here you pass the model.
+            String body = "{\"model\": \"" + model + "\", \"messages\": [{\"role\": \"user\", \"content\": \"" + prompt + "\"}]}";
+            connection.setDoOutput(true);
+            OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
+            writer.write(body);
+            writer.flush();
+            writer.close();
+
+            // Response from ChatGPT
+            return new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private BufferedReader getBufferedReader(String prompt, URI obj) throws IOException {
-        //Create the connection passing the url, apiKey. You prepare the call.
-        HttpURLConnection connection = (HttpURLConnection) obj.toURL().openConnection();
-        connection.setRequestMethod("POST");
-        connection.setRequestProperty("Authorization", "Bearer " + apiKey);
-        connection.setRequestProperty("Content-Type", "application/json");
-
-        // The request body. Here you pass the model.
-        String body = "{\"model\": \"" + model + "\", \"messages\": [{\"role\": \"user\", \"content\": \"" + prompt + "\"}]}";
-        connection.setDoOutput(true);
-        OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
-        writer.write(body);
-        writer.flush();
-        writer.close();
-
-        // Response from ChatGPT
-        return new BufferedReader(new InputStreamReader(connection.getInputStream()));
-    }
-
-    private String extractMessageFromJSONResponse(String response) {
+    public String extractMessageFromJSONResponse(String response) {
         int start = response.indexOf("content") + 11;
         int end = response.indexOf("\"", start);
 
