@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserDTO> getAllUsers() {
         List<User> userList = userRepository.findAll();
-        log.info("User list retrieved. Method: {}", "getAllUsers");
+        log.info("User list retrieved. Method: {}.", "getAllUsers");
 
         return userList.stream()
                 .map(user -> modelMapper.map(user, UserDTO.class))

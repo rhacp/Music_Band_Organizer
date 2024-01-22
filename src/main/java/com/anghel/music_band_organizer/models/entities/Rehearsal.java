@@ -1,12 +1,13 @@
 package com.anghel.music_band_organizer.models.entities;
 
+import com.anghel.music_band_organizer.utils.enums.Availability;
 import com.anghel.music_band_organizer.utils.enums.State;
 import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Data
 @Entity
@@ -24,10 +25,13 @@ public class Rehearsal {
     private LocalDate rehearsalDate;
 
     @Column(name = "rehearsal_time")
-    private LocalDateTime rehearsalTime;
+    private LocalTime rehearsalTime;
 
     @Column(name = "rehearsal_duration_hours")
     private Integer rehearsalDurationHours;
+
+    @Column(name = "rehearsal_availability")
+    private Availability rehearsalAvailability;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "rehersal_band_id")

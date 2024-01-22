@@ -2,11 +2,12 @@ package com.anghel.music_band_organizer.models.dtos;
 
 import com.anghel.music_band_organizer.models.entities.Band;
 import com.anghel.music_band_organizer.utils.enums.State;
+import com.anghel.music_band_organizer.validations.availability.EnumAvailabilityPattern;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Data
 public class RehearsalDTO {
@@ -19,7 +20,10 @@ public class RehearsalDTO {
     private LocalDate rehearsalDate;
 
     @NotNull
-    private LocalDateTime rehearsalTime;
+    private LocalTime rehearsalTime;
+
+    @EnumAvailabilityPattern(anyOf = {"private", "public"})
+    private String rehearsalAvailability;
 
     @NotNull
     @Min(1)

@@ -1,11 +1,11 @@
-package com.anghel.music_band_organizer.validations;
+package com.anghel.music_band_organizer.validations.availability;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
 import java.util.Arrays;
 
-public class EnumRolePatternValidator implements ConstraintValidator<EnumRolePattern, String> {
+public class EnumAvailabilityPatternValidator implements ConstraintValidator<EnumAvailabilityPattern, String> {
 
     private String[] subset;
 
@@ -15,7 +15,7 @@ public class EnumRolePatternValidator implements ConstraintValidator<EnumRolePat
     }
 
     @Override
-    public void initialize(EnumRolePattern constraintAnnotation) {
+    public void initialize(EnumAvailabilityPattern constraintAnnotation) {
         this.subset = constraintAnnotation.anyOf();
     }
 }
