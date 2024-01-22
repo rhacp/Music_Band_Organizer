@@ -1,6 +1,5 @@
 package com.anghel.music_band_organizer.controllers;
 
-import com.anghel.music_band_organizer.models.dtos.UserDTO;
 import com.anghel.music_band_organizer.models.dtos.rehearsal.RehearsalDTO;
 import com.anghel.music_band_organizer.services.rehearsal.RehearsalService;
 import jakarta.validation.Valid;
@@ -30,12 +29,12 @@ public class RehearsalController {
     }
 
     @GetMapping("/{rehearsalId}")
-    public ResponseEntity<RehearsalDTO> getUserById(@PathVariable Long rehearsalId) {
+    public ResponseEntity<RehearsalDTO> getRehearsalById(@PathVariable Long rehearsalId) {
         return ResponseEntity.ok(rehearsalService.getRehearsalById(rehearsalId));
     }
 
     @DeleteMapping("/{rehearsalId}")
-    public ResponseEntity<String> deleteUserById(@PathVariable Long rehearsalId) {
+    public ResponseEntity<String> deleteRehearsalById(@PathVariable Long rehearsalId) {
         return ResponseEntity.ok(rehearsalService.deleteRehearsalById(rehearsalId));
     }
 }
