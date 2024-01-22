@@ -2,15 +2,11 @@ package com.anghel.music_band_organizer.services.message;
 
 import com.anghel.music_band_organizer.exceptions.message.MessageAlreadyExistsException;
 import com.anghel.music_band_organizer.exceptions.message.MessageNotFoundException;
-import com.anghel.music_band_organizer.exceptions.rehearsal.RehearsalAlreadyExistsException;
 import com.anghel.music_band_organizer.models.dtos.MessageDTO;
 import com.anghel.music_band_organizer.models.entities.Message;
 import com.anghel.music_band_organizer.repository.MessageRepository;
-import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 @Slf4j
 @Component

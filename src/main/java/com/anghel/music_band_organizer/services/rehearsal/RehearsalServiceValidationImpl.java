@@ -2,7 +2,7 @@ package com.anghel.music_band_organizer.services.rehearsal;
 
 import com.anghel.music_band_organizer.exceptions.rehearsal.RehearsalAlreadyExistsException;
 import com.anghel.music_band_organizer.exceptions.rehearsal.RehearsalNotFoundException;
-import com.anghel.music_band_organizer.models.dtos.rehearsal.RehearsalDTO;
+import com.anghel.music_band_organizer.models.dtos.RehearsalDTO;
 import com.anghel.music_band_organizer.models.entities.Rehearsal;
 import com.anghel.music_band_organizer.repository.rehearsal.RehearsalRepository;
 import jakarta.transaction.Transactional;
@@ -34,7 +34,7 @@ public class RehearsalServiceValidationImpl implements RehearsalServiceValidatio
     @Override
     public Rehearsal getValidRehearsal(Long rehearsalId, String methodName) {
         Rehearsal rehearsal = rehearsalRepository.findById(rehearsalId)
-                .orElseThrow(() -> new RehearsalNotFoundException("Rehearsal with id " + rehearsalId + "not found."));
+                .orElseThrow(() -> new RehearsalNotFoundException("Rehearsal with id " + rehearsalId + " not found."));
         log.info("Rehearsal with id {} retrieved. Method: {}.", rehearsalId, methodName);
 
         return rehearsal;

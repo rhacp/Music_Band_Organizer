@@ -1,7 +1,7 @@
 package com.anghel.music_band_organizer.controllers;
 
 import com.anghel.music_band_organizer.models.dtos.MessageDTO;
-import com.anghel.music_band_organizer.models.dtos.rehearsal.RehearsalDTO;
+import com.anghel.music_band_organizer.models.dtos.RehearsalDTO;
 import com.anghel.music_band_organizer.services.message.MessageService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;

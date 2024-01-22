@@ -5,6 +5,7 @@ import com.anghel.music_band_organizer.exceptions.band.BandNotFoundException;
 import com.anghel.music_band_organizer.exceptions.message.MessageAlreadyExistsException;
 import com.anghel.music_band_organizer.exceptions.message.MessageNotFoundException;
 import com.anghel.music_band_organizer.exceptions.post.PostAlreadyExistsException;
+import com.anghel.music_band_organizer.exceptions.post.PostNotFoundException;
 import com.anghel.music_band_organizer.exceptions.rehearsal.RehearsalAlreadyExistsException;
 import com.anghel.music_band_organizer.exceptions.rehearsal.RehearsalNotFoundException;
 import com.anghel.music_band_organizer.exceptions.user.UserAlreadyExistsException;
@@ -74,6 +75,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(PostAlreadyExistsException.class)
     public ResponseEntity<Object> handlePostAlreadyExistsException(PostAlreadyExistsException e) {
         return getResponse(e, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(PostNotFoundException.class)
+    public ResponseEntity<Object> handlePostNotFoundException(PostNotFoundException e) {
+        return getResponse(e, HttpStatus.NOT_FOUND);
     }
 
     private ResponseEntity<Object> getResponse(RuntimeException e, HttpStatus httpStatus) {
