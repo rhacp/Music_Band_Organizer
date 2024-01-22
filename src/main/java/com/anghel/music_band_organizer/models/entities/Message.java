@@ -3,6 +3,9 @@ package com.anghel.music_band_organizer.models.entities;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 @Data
 @Entity
 @Table(name = "message")
@@ -20,4 +23,10 @@ public class Message {
 
     @Column(name = "message")
     private String message;
+
+    @Column(name = "message_date")
+    private LocalDate messageDate;
+
+    @Column(name = "message_time")
+    private LocalTime messageTime;
 }

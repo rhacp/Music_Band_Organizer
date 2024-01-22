@@ -4,6 +4,9 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 @Data
 public class MessageDTO {
 
@@ -16,4 +19,8 @@ public class MessageDTO {
     @NotBlank
     @Size(min = 3, max = 1000, message = "must be between 3 and 1000 characters")
     private String message;
+
+    private LocalDate messageDate;
+
+    private LocalTime messageTime;
 }

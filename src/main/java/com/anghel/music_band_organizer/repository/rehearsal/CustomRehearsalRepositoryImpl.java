@@ -9,7 +9,7 @@ import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +19,7 @@ public class CustomRehearsalRepositoryImpl implements CustomRehearsalRepository{
     private EntityManager entityManager;
 
     @Override
-    public List<Rehearsal> findFilteredRehearsal(Long rehearsalId, LocalDate rehearsalDate, LocalDateTime rehearsalTime) {
+    public List<Rehearsal> findFilteredRehearsal(Long rehearsalId, LocalDate rehearsalDate, LocalTime rehearsalTime) {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<Rehearsal> cq = cb.createQuery(Rehearsal.class);
 

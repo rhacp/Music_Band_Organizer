@@ -1,4 +1,4 @@
-package com.anghel.music_band_organizer.validations;
+package com.anghel.music_band_organizer.validations.role;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
