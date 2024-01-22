@@ -28,7 +28,7 @@ public class MessageServiceValidationImpl implements MessageServiceValidation{
     @Override
     public Message getValidMessage(Long messageId, String methodName) {
         Message message = messageRepository.findById(messageId)
-                .orElseThrow(() -> new MessageNotFoundException("Message with id " + messageId + "not found."));
+                .orElseThrow(() -> new MessageNotFoundException("Message with id " + messageId + " not found."));
         log.info("Message with id {} retrieved. Method: {}.", messageId, methodName);
 
         return message;
