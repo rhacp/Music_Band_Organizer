@@ -6,6 +6,7 @@ import com.anghel.music_band_organizer.services.open_ai.OpenAIImpl;
 import com.anghel.music_band_organizer.models.entities.User;
 import com.anghel.music_band_organizer.repository.BandRepository;
 import com.anghel.music_band_organizer.services.user.UserService;
+import com.anghel.music_band_organizer.services.user.UserServiceValidation;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -35,7 +36,7 @@ public class BandServiceImpl implements BandService{
     @Override
     public BandDTO createBand(BandDTO bandDTO, Long userId) {
         bandServiceValidation.validateBandAlreadyExists(bandDTO);
-        User user = userService.addUserBandAndRole(userId, bandDTO.getBandName());
+        User user = userService.createBand(userId, bandDTO.getBandName());
 
         Band band = modelMapper.map(bandDTO, Band.class);
         band.getUserList().add(user);
@@ -80,5 +81,34 @@ public class BandServiceImpl implements BandService{
         Band band = bandServiceValidation.getValidBand(bandId, "generateBandDescription");
 
         return openAI.chatGPT("Please create a short description of my band based on my band name, which is: " + band.getBandName() + ". Please answer using up to 100 tokens.");
+    }
+
+    @Override
+    public BandDTO addUserToBand(Long bandId, Long userId, Long userToAddId) {
+        Band band = bandServiceValidation.getValidBand(bandId, "addUserToBand");
+        User user = userService.addUserToBand(userId, userToAddId, band, "addUserToBand");
+
+        band.getUserList().add(user);
+        Band savedBand = bandRepository.save(band);
+        log.info("Band with id {} had user with id {} added. Method: {}", savedBand.getId(), user.getId(), "createBand");
+
+        return modelMapper.map(savedBand, BandDTO.class);
+    }
+
+    @Override
+    public Band getValidBandForRehearsal(Long bandId, String methodName) {
+        return bandServiceValidation.getValidBand(bandId, "createRehearsal");
+    }
+
+    @Override
+    public BandDTO makeUserAdminInBand(Long bandId, Long userId, Long userToChangeRoleId) {
+        Band band = bandServiceValidation.getValidBand(bandId, "addUserToBand");
+        User user = userService.makeUserAdminInBand(userId, userToChangeRoleId, band, "makeUserAdminInBand");
+
+        band.getUserList().add(user);
+        Band savedBand = bandRepository.save(band);
+        log.info("Band with id {} had user with id {} added. Method: {}", savedBand.getId(), user.getId(), "createBand");
+
+        return modelMapper.map(savedBand, BandDTO.class);
     }
 }

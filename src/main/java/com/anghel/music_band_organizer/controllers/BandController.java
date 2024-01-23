@@ -42,4 +42,14 @@ public class BandController {
     public ResponseEntity<String> generateBandDescription(@PathVariable Long bandId) {
         return ResponseEntity.ok(bandService.generateBandDescription(bandId));
     }
+
+    @PutMapping("/{bandId}/users/{userId}/{userToAddId}")
+    public ResponseEntity<BandDTO> addUserToBand(@PathVariable Long bandId, @PathVariable Long userId, @PathVariable Long userToAddId) {
+        return ResponseEntity.ok(bandService.addUserToBand(bandId, userId, userToAddId));
+    }
+
+    @PutMapping("/{bandId}/users/{userId}/admin/{userToChangeRoleId}")
+    public ResponseEntity<BandDTO> makeUserAdminInBand(@PathVariable Long bandId, @PathVariable Long userId, @PathVariable Long userToChangeRoleId) {
+        return ResponseEntity.ok(bandService.makeUserAdminInBand(bandId, userId, userToChangeRoleId));
+    }
 }

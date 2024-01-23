@@ -37,4 +37,9 @@ public class RehearsalController {
     public ResponseEntity<String> deleteRehearsalById(@PathVariable Long rehearsalId) {
         return ResponseEntity.ok(rehearsalService.deleteRehearsalById(rehearsalId));
     }
+
+    @PutMapping("/{rehearsalId}/users/{userId}")
+    public ResponseEntity<RehearsalDTO> finishRehearsal(@PathVariable Long rehearsalId, @PathVariable Long userId) {
+        return ResponseEntity.ok(rehearsalService.finishRehearsal(rehearsalId, userId));
+    }
 }

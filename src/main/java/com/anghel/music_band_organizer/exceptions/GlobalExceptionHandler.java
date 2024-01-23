@@ -8,8 +8,7 @@ import com.anghel.music_band_organizer.exceptions.post.PostAlreadyExistsExceptio
 import com.anghel.music_band_organizer.exceptions.post.PostNotFoundException;
 import com.anghel.music_band_organizer.exceptions.rehearsal.RehearsalAlreadyExistsException;
 import com.anghel.music_band_organizer.exceptions.rehearsal.RehearsalNotFoundException;
-import com.anghel.music_band_organizer.exceptions.user.UserAlreadyExistsException;
-import com.anghel.music_band_organizer.exceptions.user.UserNotFoundException;
+import com.anghel.music_band_organizer.exceptions.user.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -40,6 +39,26 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<Object> handleUserNotFoundException(UserNotFoundException e) {
         return getResponse(e, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(UserNotInSpecificBandException.class)
+    public ResponseEntity<Object> handleUserNotInSpecificBandException(UserNotInSpecificBandException e) {
+        return getResponse(e, HttpStatus.UNAUTHORIZED);
+    }
+
+    @ExceptionHandler(UserNotAdminInBandException.class)
+    public ResponseEntity<Object> handleUserNotAdminInBandException(UserNotAdminInBandException e) {
+        return getResponse(e, HttpStatus.UNAUTHORIZED);
+    }
+
+    @ExceptionHandler(UserDuplicateException.class)
+    public ResponseEntity<Object> handleUserDuplicateException(UserDuplicateException e) {
+        return getResponse(e, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(UserAlreadyInSpecificBandException.class)
+    public ResponseEntity<Object> handleUserAlreadyInSpecificBandException(UserAlreadyInSpecificBandException e) {
+        return getResponse(e, HttpStatus.CONFLICT);
     }
 
     @ExceptionHandler(BandAlreadyExistsException.class)

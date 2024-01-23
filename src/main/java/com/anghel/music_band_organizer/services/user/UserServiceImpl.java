@@ -1,6 +1,8 @@
 package com.anghel.music_band_organizer.services.user;
 
 import com.anghel.music_band_organizer.models.dtos.UserDTO;
+import com.anghel.music_band_organizer.models.entities.Band;
+import com.anghel.music_band_organizer.models.entities.Rehearsal;
 import com.anghel.music_band_organizer.models.entities.User;
 import com.anghel.music_band_organizer.repository.user.UserRepository;
 import com.anghel.music_band_organizer.utils.enums.Role;
@@ -98,12 +100,55 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public User addUserBandAndRole(Long userId, String bandName) {
+    public User createBand(Long userId, String bandName) {
         User user = userServiceValidation.getValidUser(userId, "setUserBandAndRole");
 
-        user.getBandRole().put(Role.ADMIN.getRoleLabel(), bandName);
+        user.getBandRole().put(bandName, Role.ADMIN.getRoleLabel());
         User savedUser = userRepository.save(user);
         log.info("User {} : {} had a new band and role added in db. Method: {}", savedUser.getId(), savedUser.getEmail(), "addUserBandAndRole");
+
+        return savedUser;
+    }
+
+    @Override
+    public void finishRehearsal(Long userId, Rehearsal rehearsal) {
+        User user = userServiceValidation.getValidUser(userId, "finishRehearsal");
+        userServiceValidation.validateUserNotInSpecificBandException(user, rehearsal.getRehearsalBand());
+    }
+
+    @Transactional
+    @Override
+    public User addUserToBand(Long userId, Long userToAddId, Band band, String methodName) {
+        User user = userServiceValidation.getValidUser(userId, methodName);
+        User userToAdd = userServiceValidation.getValidUser(userToAddId, methodName);
+        userServiceValidation.validateUserDuplicateException(user, userToAdd);
+
+        userServiceValidation.validateUserNotInSpecificBandException(user, band);
+        userServiceValidation.validateUserNotAdminInBandException(user, band);
+        userServiceValidation.validateUserAlreadyInSpecificBandException(userToAdd, band);
+
+        userToAdd.getBandList().add(band);
+        userToAdd.getBandRole().put(band.getBandName(), Role.MEMBER.getRoleLabel());
+        User savedUser = userRepository.save(userToAdd);
+        log.info("User {} : {} had bandList and bandRole changed. Method: {}", savedUser.getId(), savedUser.getEmail(), "addUserToBand");
+
+        return savedUser;
+    }
+
+    @Transactional
+    @Override
+    public User makeUserAdminInBand(Long userId, Long userToChangeRoleId, Band band, String methodName) {
+        User user = userServiceValidation.getValidUser(userId, methodName);
+        User userToChangeRole = userServiceValidation.getValidUser(userToChangeRoleId, methodName);
+        userServiceValidation.validateUserDuplicateException(user, userToChangeRole);
+
+        userServiceValidation.validateUserNotInSpecificBandException(user, band);
+        userServiceValidation.validateUserNotAdminInBandException(user, band);
+        userServiceValidation.validateUserNotInSpecificBandException(userToChangeRole, band);
+
+        userToChangeRole.getBandRole().put(band.getBandName(), Role.ADMIN.getRoleLabel());
+        User savedUser = userRepository.save(userToChangeRole);
+        log.info("User {} : {} had bandList and bandRole changed. Method: {}", savedUser.getId(), savedUser.getEmail(), "addUserToBand");
 
         return savedUser;
     }

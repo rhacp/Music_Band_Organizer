@@ -1,6 +1,8 @@
 package com.anghel.music_band_organizer.services.user;
 
 import com.anghel.music_band_organizer.models.dtos.UserDTO;
+import com.anghel.music_band_organizer.models.entities.Band;
+import com.anghel.music_band_organizer.models.entities.Rehearsal;
 import com.anghel.music_band_organizer.models.entities.User;
 
 import java.time.LocalDate;
@@ -24,5 +26,11 @@ public interface UserService {
                                    String pastExperience,
                                    String userStageName);
 
-    User addUserBandAndRole(Long userId, String bandName);
+    User createBand(Long userId, String bandName);
+
+    void finishRehearsal(Long userId, Rehearsal rehearsal);
+
+    User addUserToBand(Long userId, Long userToAddId, Band band, String methodName);
+
+    User makeUserAdminInBand(Long userId, Long userToChangeRoleId, Band band, String methodName);
 }
