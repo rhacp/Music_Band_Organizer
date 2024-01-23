@@ -13,4 +13,5 @@ public interface RehearsalService {
     RehearsalDTO getRehearsalById(Long rehearsalId);
 
     String deleteRehearsalById(Long rehearsalId);
+    RehearsalDTO finishRehearsal(Long rehearsalId, Long userId);
 }

@@ -1,13 +1,13 @@
 package com.anghel.music_band_organizer.models.dtos;
 
 import com.anghel.music_band_organizer.models.entities.Band;
+import com.anghel.music_band_organizer.validations.regex.RegexPattern;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -26,8 +26,8 @@ public class UserDTO {
     @Size(min = 3, max = 30, message = "Must be between 3 and 30 characters.")
     private String lastName;
 
-    @NotNull
-    private LocalDate birthday;
+    @RegexPattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$", message = "Must be of format XXXX-XX-XX and not null.")
+    private String birthday;
 
     @NotBlank
     @Size(min = 3, max = 30, message = "Must be between 3 and 30 characters.")

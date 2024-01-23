@@ -4,7 +4,8 @@ import com.anghel.music_band_organizer.models.dtos.RehearsalDTO;
 import com.anghel.music_band_organizer.models.entities.Band;
 import com.anghel.music_band_organizer.models.entities.Rehearsal;
 import com.anghel.music_band_organizer.repository.rehearsal.RehearsalRepository;
-import com.anghel.music_band_organizer.services.band.BandServiceValidation;
+import com.anghel.music_band_organizer.services.band.BandService;
+import com.anghel.music_band_organizer.services.user.UserService;
 import com.anghel.music_band_organizer.utils.enums.Availability;
 import com.anghel.music_band_organizer.utils.enums.State;
 import jakarta.transaction.Transactional;
@@ -23,19 +24,21 @@ public class RehearsalServiceImpl implements RehearsalService{
     private final RehearsalRepository rehearsalRepository;
     private final RehearsalServiceValidation rehearsalServiceValidation;
     private final ModelMapper modelMapper;
-    private final BandServiceValidation bandServiceValidation;
+    private final BandService bandService;
+    private final UserService userService;
 
-    public RehearsalServiceImpl(RehearsalRepository rehearsalRepository, RehearsalServiceValidation rehearsalServiceValidation, ModelMapper modelMapper, BandServiceValidation bandServiceValidation) {
+    public RehearsalServiceImpl(RehearsalRepository rehearsalRepository, RehearsalServiceValidation rehearsalServiceValidation, ModelMapper modelMapper, BandService bandService, UserService userService) {
         this.rehearsalRepository = rehearsalRepository;
         this.rehearsalServiceValidation = rehearsalServiceValidation;
         this.modelMapper = modelMapper;
-        this.bandServiceValidation = bandServiceValidation;
+        this.bandService = bandService;
+        this.userService = userService;
     }
 
     @Transactional
     @Override
     public RehearsalDTO createRehearsal(RehearsalDTO rehearsalDTO, Long bandId) {
-        Band band = bandServiceValidation.getValidBand(bandId, "createRehearsal");
+        Band band = bandService.getValidBandForRehearsal(bandId, "createRehearsal");
         rehearsalServiceValidation.validateRehearsalAlreadyExists(rehearsalDTO);
 
         Rehearsal rehearsal = modelMapper.map(rehearsalDTO, Rehearsal.class);
@@ -46,7 +49,7 @@ public class RehearsalServiceImpl implements RehearsalService{
         rehearsal.setRehearsalTime(LocalTime.parse(rehearsalDTO.getRehearsalTime()));
 
         Rehearsal savedRehearsal = rehearsalRepository.save(rehearsal);
-        log.info("Rehearsal with id {} inserted in db. Method: {}", savedRehearsal.getId(), "createRehearsal");
+        log.info("Rehearsal with id {} inserted in db. Method: {}.", savedRehearsal.getId(), "createRehearsal");
 
         return modelMapper.map(savedRehearsal, RehearsalDTO.class);
 
@@ -80,6 +83,18 @@ public class RehearsalServiceImpl implements RehearsalService{
         log.info("Rehearsal with id {} deleted. Method: {}.", rehearsalId, "deleteRehearsalById");
 
         return "Rehearsal with id " + rehearsalId + " deleted.";
+    }
+
+    @Override
+    public RehearsalDTO finishRehearsal(Long rehearsalId, Long userId) {
+        Rehearsal rehearsal = rehearsalServiceValidation.getValidRehearsal(rehearsalId, "finishRehearsal");
+        userService.finishRehearsal(userId, rehearsal);
+
+        rehearsal.setRehearsalState(State.DONE);
+        Rehearsal savedRehearsal = rehearsalRepository.save(rehearsal);
+        log.info("Rehearsal with id {} had the state changed to DONE. Method: {}.", savedRehearsal.getId(), "finishRehearsal");
+
+        return modelMapper.map(savedRehearsal, RehearsalDTO.class);
     }
 
     private Availability convertAvailability(String availabilityLabel) {
