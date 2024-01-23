@@ -12,6 +12,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 @Slf4j
@@ -40,6 +42,8 @@ public class RehearsalServiceImpl implements RehearsalService{
         rehearsal.setRehearsalBand(band);
         rehearsal.setRehearsalState(State.DUE);
         rehearsal.setRehearsalAvailability(convertAvailability(rehearsalDTO.getRehearsalAvailability()));
+        rehearsal.setRehearsalDate(LocalDate.parse(rehearsalDTO.getRehearsalDate()));
+        rehearsal.setRehearsalTime(LocalTime.parse(rehearsalDTO.getRehearsalTime()));
 
         Rehearsal savedRehearsal = rehearsalRepository.save(rehearsal);
         log.info("Rehearsal with id {} inserted in db. Method: {}", savedRehearsal.getId(), "createRehearsal");

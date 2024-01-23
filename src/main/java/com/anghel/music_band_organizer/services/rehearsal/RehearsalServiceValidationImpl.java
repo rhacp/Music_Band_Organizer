@@ -9,7 +9,8 @@ import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Slf4j
 @Component
@@ -22,10 +23,14 @@ public class RehearsalServiceValidationImpl implements RehearsalServiceValidatio
     @Transactional
     @Override
     public void validateRehearsalAlreadyExists(RehearsalDTO rehearsalDTO) {
-        //Rehearsal rehearsal = rehearsalRepository.findByDateAndTime();
-        List<Rehearsal> rehearsalList = rehearsalRepository.findFilteredRehearsal(rehearsalDTO.getId(), rehearsalDTO.getRehearsalDate(), rehearsalDTO.getRehearsalTime());
+        Rehearsal rehearsal = rehearsalRepository.findByRehearsalDateAndRehearsalTime(LocalDate.parse(rehearsalDTO.getRehearsalDate()), LocalTime.parse(rehearsalDTO.getRehearsalTime()));
+//        List<Rehearsal> rehearsalList = rehearsalRepository.findFilteredRehearsal(rehearsalDTO.getId(), LocalDate.parse(rehearsalDTO.getRehearsalDate()), LocalTime.parse(rehearsalDTO.getRehearsalTime()));
 
-        if (!rehearsalList.isEmpty()) {
+//        if (!rehearsalList.isEmpty()) {
+//            throw new RehearsalAlreadyExistsException("A rehearsal with the date " + rehearsalDTO.getRehearsalDate() + " and time " + rehearsalDTO.getRehearsalTime() + " already exists.");
+//        }
+
+        if (rehearsal != null) {
             throw new RehearsalAlreadyExistsException("A rehearsal with the date " + rehearsalDTO.getRehearsalDate() + " and time " + rehearsalDTO.getRehearsalTime() + " already exists.");
         }
     }

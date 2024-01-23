@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Repository
 public interface RehearsalRepository extends JpaRepository<Rehearsal, Long>, CustomRehearsalRepository {
@@ -14,7 +14,7 @@ public interface RehearsalRepository extends JpaRepository<Rehearsal, Long>, Cus
 
     Rehearsal findRehearsalByRehearsalDate(LocalDate rehearsalDate);
 
-    Rehearsal findRehearsalByRehearsalTime(LocalDateTime rehearsalTime);
+    Rehearsal findRehearsalByRehearsalTime(LocalTime rehearsalTime);
 
-    Rehearsal findByRehearsalDateAndRehearsalTime(LocalDate rehearsalDate, LocalDateTime rehearsalTime);
+    Rehearsal findByRehearsalDateAndRehearsalTime(LocalDate rehearsalDate, LocalTime rehearsalTime);
 }
