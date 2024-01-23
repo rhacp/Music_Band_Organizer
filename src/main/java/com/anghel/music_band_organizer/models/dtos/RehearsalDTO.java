@@ -3,11 +3,9 @@ package com.anghel.music_band_organizer.models.dtos;
 import com.anghel.music_band_organizer.models.entities.Band;
 import com.anghel.music_band_organizer.utils.enums.State;
 import com.anghel.music_band_organizer.validations.availability.EnumAvailabilityPattern;
+import com.anghel.music_band_organizer.validations.regex.RegexPattern;
 import jakarta.validation.constraints.*;
 import lombok.Data;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
 
 @Data
 public class RehearsalDTO {
@@ -16,11 +14,11 @@ public class RehearsalDTO {
 
     private State state;
 
-    @NotNull
-    private LocalDate rehearsalDate;
+    @RegexPattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$", message = "Must be of format XXXX-XX-XX and not null.")
+    private String rehearsalDate;
 
-    @NotNull
-    private LocalTime rehearsalTime;
+    @RegexPattern(regexp = "([01]?[0-9]|2[0-3]):[0-5][0-9]", message = "Must be of format XX.XX and not null.")
+    private String rehearsalTime;
 
     @EnumAvailabilityPattern(anyOf = {"private", "public"})
     private String rehearsalAvailability;
