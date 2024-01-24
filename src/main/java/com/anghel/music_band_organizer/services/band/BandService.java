@@ -15,8 +15,6 @@ public interface BandService {
 
     String deleteBandById(Long bandId);
 
-//    String generateBandDescription(Long bandId);
-
     BandDTO addUserToBand(Long bandId, Long userId, Long userToAddId);
 
     BandDTO makeUserAdminInBand(Long bandId, Long userId, Long userToChangeRoleId);

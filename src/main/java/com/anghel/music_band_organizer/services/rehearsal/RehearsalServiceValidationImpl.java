@@ -24,11 +24,6 @@ public class RehearsalServiceValidationImpl implements RehearsalServiceValidatio
     @Override
     public void validateRehearsalAlreadyExists(RehearsalDTO rehearsalDTO) {
         Rehearsal rehearsal = rehearsalRepository.findByRehearsalDateAndRehearsalTime(LocalDate.parse(rehearsalDTO.getRehearsalDate()), LocalTime.parse(rehearsalDTO.getRehearsalTime()));
-//        List<Rehearsal> rehearsalList = rehearsalRepository.findFilteredRehearsal(rehearsalDTO.getId(), LocalDate.parse(rehearsalDTO.getRehearsalDate()), LocalTime.parse(rehearsalDTO.getRehearsalTime()));
-
-//        if (!rehearsalList.isEmpty()) {
-//            throw new RehearsalAlreadyExistsException("A rehearsal with the date " + rehearsalDTO.getRehearsalDate() + " and time " + rehearsalDTO.getRehearsalTime() + " already exists.");
-//        }
 
         if (rehearsal != null) {
             throw new RehearsalAlreadyExistsException("A rehearsal with the date " + rehearsalDTO.getRehearsalDate() + " and time " + rehearsalDTO.getRehearsalTime() + " already exists.");

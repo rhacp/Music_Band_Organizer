@@ -21,7 +21,6 @@ public class BandServiceImpl implements BandService{
     private final BandServiceValidation bandServiceValidation;
     private final ModelMapper modelMapper;
     private final UserService userService;
-    private final OpenAIImpl openAI;
 
     public BandServiceImpl(BandRepository bandRepository, BandServiceValidation bandServiceValidation, ModelMapper modelMapper, UserService userService, OpenAIImpl openAI) {
         this.bandRepository = bandRepository;
@@ -75,13 +74,6 @@ public class BandServiceImpl implements BandService{
         return "Band with id " + bandId + " deleted.";
     }
 
-//    @Override
-//    public String generateBandDescription(Long bandId) {
-//        Band band = bandServiceValidation.getValidBand(bandId, "generateBandDescription");
-//
-//        return openAI.chatGPT("Please create a short description of my band based on my band name, which is: " + band.getBandName() + ". Please answer using up to 100 tokens.");
-//    }
-
     @Override
     public BandDTO addUserToBand(Long bandId, Long userId, Long userToAddId) {
         Band band = bandServiceValidation.getValidBand(bandId, "addUserToBand");
@@ -89,7 +81,7 @@ public class BandServiceImpl implements BandService{
 
         band.getUserList().add(user);
         Band savedBand = bandRepository.save(band);
-        log.info("Band with id {} had user with id {} added. Method: {}", savedBand.getId(), user.getId(), "createBand");
+        log.info("Band with id {} had user with id {} added. Method: {}", savedBand.getId(), user.getId(), "addUserToBand");
 
         return modelMapper.map(savedBand, BandDTO.class);
     }

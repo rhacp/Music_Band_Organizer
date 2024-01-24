@@ -38,11 +38,6 @@ public class BandController {
         return ResponseEntity.ok(bandService.deleteBandById(bandId));
     }
 
-//    @PostMapping("/{bandId}/openAI")
-//    public ResponseEntity<String> generateBandDescription(@PathVariable Long bandId) {
-//        return ResponseEntity.ok(bandService.generateBandDescription(bandId));
-//    }
-
     @PutMapping("/{bandId}/users/{userId}/{userToAddId}")
     public ResponseEntity<BandDTO> addUserToBand(@PathVariable Long bandId, @PathVariable Long userId, @PathVariable Long userToAddId) {
         return ResponseEntity.ok(bandService.addUserToBand(bandId, userId, userToAddId));

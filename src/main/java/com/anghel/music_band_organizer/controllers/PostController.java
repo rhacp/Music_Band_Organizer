@@ -19,7 +19,7 @@ public class PostController {
     }
 
     @PostMapping("/users/{userId}/bands/{bandId}")
-    private ResponseEntity<PostDTO> createPost(@Valid @RequestBody PostDTO postDTO, @PathVariable Long userId, @PathVariable Long bandId) {
+    public ResponseEntity<PostDTO> createPost(@Valid @RequestBody PostDTO postDTO, @PathVariable Long userId, @PathVariable Long bandId) {
         return ResponseEntity.ok(postService.createPost(postDTO, userId, bandId));
     }
 
