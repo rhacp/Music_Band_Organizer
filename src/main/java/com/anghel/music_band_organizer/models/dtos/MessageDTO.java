@@ -1,26 +1,28 @@
 package com.anghel.music_band_organizer.models.dtos;
 
+import com.anghel.music_band_organizer.models.entities.User;
+import com.anghel.music_band_organizer.validations.regex.RegexPattern;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
 
 @Data
 public class MessageDTO {
 
     private Long id;
 
-    private String fromUser;
+    private User fromUser;
 
-    private String toUser;
+
+    private User toUser;
 
     @NotBlank
     @Size(min = 3, max = 1000, message = "must be between 3 and 1000 characters")
-    private String message;
+    private String content;
 
-    private LocalDate messageDate;
+    @RegexPattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$", message = "Must be of format XXXX-XX-XX and not null.")
+    private String messageDate;
 
-    private LocalTime messageTime;
+    @RegexPattern(regexp = "([01]?[0-9]|2[0-3]):[0-5][0-9]", message = "Must be of format XX.XX and not null.")
+    private String messageTime;
 }

@@ -23,10 +23,10 @@ public class RegexPatternValidator implements ConstraintValidator<RegexPattern, 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
         if (value == null) {
-            return false;
+            return true;
         }
 
-        Matcher m = pattern.matcher(value.toString());
+        Matcher m = pattern.matcher(value);
         return m.matches();
     }
 }

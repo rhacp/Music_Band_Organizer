@@ -152,4 +152,9 @@ public class UserServiceImpl implements UserService {
 
         return savedUser;
     }
+
+    @Override
+    public User sendMessage(Long userId, String methodName) {
+        return userServiceValidation.getValidUser(userId,methodName);
+    }
 }
