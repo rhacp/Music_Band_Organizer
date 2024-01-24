@@ -49,7 +49,7 @@ public class BandServiceImpl implements BandService{
     @Override
     public List<BandDTO> getAllBands() {
         List<Band> bandList = bandRepository.findAll();
-        log.info("Band list retrieved. Method: {}", "getAllBands");
+        log.info("Band list retrieved. Method: {}.", "getAllBands");
 
         return bandList.stream()
                 .map(band -> modelMapper.map(band, BandDTO.class))
@@ -75,12 +75,12 @@ public class BandServiceImpl implements BandService{
         return "Band with id " + bandId + " deleted.";
     }
 
-    @Override
-    public String generateBandDescription(Long bandId) {
-        Band band = bandServiceValidation.getValidBand(bandId, "generateBandDescription");
-
-        return openAI.chatGPT("Please create a short description of my band based on my band name, which is: " + band.getBandName() + ". Please answer using up to 100 tokens.");
-    }
+//    @Override
+//    public String generateBandDescription(Long bandId) {
+//        Band band = bandServiceValidation.getValidBand(bandId, "generateBandDescription");
+//
+//        return openAI.chatGPT("Please create a short description of my band based on my band name, which is: " + band.getBandName() + ". Please answer using up to 100 tokens.");
+//    }
 
     @Override
     public BandDTO addUserToBand(Long bandId, Long userId, Long userToAddId) {
@@ -95,11 +95,6 @@ public class BandServiceImpl implements BandService{
     }
 
     @Override
-    public Band getValidBandForRehearsal(Long bandId, String methodName) {
-        return bandServiceValidation.getValidBand(bandId, "createRehearsal");
-    }
-
-    @Override
     public BandDTO makeUserAdminInBand(Long bandId, Long userId, Long userToChangeRoleId) {
         Band band = bandServiceValidation.getValidBand(bandId, "addUserToBand");
         User user = userService.makeUserAdminInBand(userId, userToChangeRoleId, band, "makeUserAdminInBand");
@@ -109,5 +104,15 @@ public class BandServiceImpl implements BandService{
         log.info("Band with id {} had user with id {} added. Method: {}", savedBand.getId(), user.getId(), "createBand");
 
         return modelMapper.map(savedBand, BandDTO.class);
+    }
+
+    @Override
+    public Band getValidBandForCreateRehearsal(Long bandId, String methodName) {
+        return bandServiceValidation.getValidBand(bandId, methodName);
+    }
+
+    @Override
+    public Band getValidBandForDeletePost(Long bandId, String methodName) {
+        return bandServiceValidation.getValidBand(bandId, methodName);
     }
 }

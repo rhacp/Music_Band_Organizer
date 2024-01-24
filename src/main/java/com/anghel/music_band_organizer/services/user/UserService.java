@@ -26,13 +26,17 @@ public interface UserService {
                                    String pastExperience,
                                    String userStageName);
 
-    User createBand(Long userId, String bandName);
-
     void finishRehearsal(Long userId, Rehearsal rehearsal);
 
     User addUserToBand(Long userId, Long userToAddId, Band band, String methodName);
 
     User makeUserAdminInBand(Long userId, Long userToChangeRoleId, Band band, String methodName);
 
+    User createRehearsal(Long userId, String methodName, Band band);
+
     User sendMessage(Long userId, String methodName);
+
+    void checkUserInBandForDeletePost(Long userId, Band band, String methodName);
+
+    User createBand(Long userId, String bandName);
 }

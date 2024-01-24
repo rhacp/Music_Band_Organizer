@@ -18,9 +18,9 @@ public class RehearsalController {
         this.rehearsalService = rehearsalService;
     }
 
-    @PostMapping("/{bandId}")
-    public ResponseEntity<RehearsalDTO> createRehearsal(@Valid @RequestBody RehearsalDTO rehearsalDTO, @PathVariable Long bandId) {
-        return ResponseEntity.ok(rehearsalService.createRehearsal(rehearsalDTO, bandId));
+    @PostMapping("/users/{userId}/bands/{bandId}")
+    public ResponseEntity<RehearsalDTO> createRehearsal(@Valid @RequestBody RehearsalDTO rehearsalDTO, @PathVariable Long userId, @PathVariable Long bandId) {
+        return ResponseEntity.ok(rehearsalService.createRehearsal(rehearsalDTO, userId, bandId));
     }
 
     @GetMapping
