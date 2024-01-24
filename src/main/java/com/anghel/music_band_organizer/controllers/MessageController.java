@@ -20,8 +20,8 @@ public class MessageController {
     }
 
     @PostMapping("/users/{fromUserId}/{toUserId}")
-    public ResponseEntity<MessageDTO> sendMessage(@Valid @RequestBody MessageDTO messageDTO, @PathVariable Long toUserId, @PathVariable Long fromUserId) {
-        return ResponseEntity.ok(messageService.sendMessage(messageDTO, toUserId, fromUserId));
+    public ResponseEntity<MessageDTO> sendMessage(@Valid @RequestBody MessageDTO messageDTO, @PathVariable Long fromUserId, @PathVariable Long toUserId) {
+        return ResponseEntity.ok(messageService.sendMessage(messageDTO, fromUserId, toUserId));
     }
 
     @GetMapping
