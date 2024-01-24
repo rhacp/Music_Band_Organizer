@@ -6,7 +6,6 @@ import com.anghel.music_band_organizer.services.open_ai.OpenAIImpl;
 import com.anghel.music_band_organizer.models.entities.User;
 import com.anghel.music_band_organizer.repository.BandRepository;
 import com.anghel.music_band_organizer.services.user.UserService;
-import com.anghel.music_band_organizer.services.user.UserServiceValidation;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
