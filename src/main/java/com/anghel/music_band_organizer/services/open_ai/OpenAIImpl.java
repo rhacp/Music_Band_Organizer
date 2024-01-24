@@ -74,8 +74,8 @@ public class OpenAIImpl implements OpenAI {
 
     public String extractMessageFromJSONResponse(String response) {
         int start = response.indexOf("content") + 11;
-        int end = response.indexOf("\"", start);
+        int end = response.indexOf("logprobs", start);
 
-        return response.substring(start, end);
+        return response.substring(start, end - 17).replace("\\", "");
     }
 }

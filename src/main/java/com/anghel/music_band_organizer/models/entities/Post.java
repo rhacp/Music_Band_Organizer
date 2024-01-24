@@ -22,6 +22,12 @@ public class Post {
     @Column(name = "post_genre")
     private String postGenre;
 
+    @Column(name = "post_recording_title")
+    private String postRecordingTitle;
+
+    @Column(name = "user_openai")
+    private Boolean useOpenAIForDescription;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "post_band_id")
     @JsonBackReference(value = "post")

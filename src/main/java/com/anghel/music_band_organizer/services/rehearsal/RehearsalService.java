@@ -6,12 +6,13 @@ import java.util.List;
 
 public interface RehearsalService {
 
-    RehearsalDTO createRehearsal(RehearsalDTO rehearsalDTO, Long bandId);
+    RehearsalDTO createRehearsal(RehearsalDTO rehearsalDTO, Long userId, Long bandId);
 
     List<RehearsalDTO> getAllRehearsals();
 
     RehearsalDTO getRehearsalById(Long rehearsalId);
 
     String deleteRehearsalById(Long rehearsalId);
+
     RehearsalDTO finishRehearsal(Long rehearsalId, Long userId);
 }

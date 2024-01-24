@@ -21,14 +21,12 @@ public class BandServiceImpl implements BandService{
     private final BandServiceValidation bandServiceValidation;
     private final ModelMapper modelMapper;
     private final UserService userService;
-    private final OpenAIImpl openAI;
 
-    public BandServiceImpl(BandRepository bandRepository, BandServiceValidation bandServiceValidation, ModelMapper modelMapper, UserService userService, OpenAIImpl openAI) {
+    public BandServiceImpl(BandRepository bandRepository, BandServiceValidation bandServiceValidation, ModelMapper modelMapper, UserService userService) {
         this.bandRepository = bandRepository;
         this.bandServiceValidation = bandServiceValidation;
         this.modelMapper = modelMapper;
         this.userService = userService;
-        this.openAI = openAI;
     }
 
     @Transactional
@@ -49,7 +47,7 @@ public class BandServiceImpl implements BandService{
     @Override
     public List<BandDTO> getAllBands() {
         List<Band> bandList = bandRepository.findAll();
-        log.info("Band list retrieved. Method: {}", "getAllBands");
+        log.info("Band list retrieved. Method: {}.", "getAllBands");
 
         return bandList.stream()
                 .map(band -> modelMapper.map(band, BandDTO.class))
@@ -76,27 +74,15 @@ public class BandServiceImpl implements BandService{
     }
 
     @Override
-    public String generateBandDescription(Long bandId) {
-        Band band = bandServiceValidation.getValidBand(bandId, "generateBandDescription");
-
-        return openAI.chatGPT("Please create a short description of my band based on my band name, which is: " + band.getBandName() + ". Please answer using up to 100 tokens.");
-    }
-
-    @Override
     public BandDTO addUserToBand(Long bandId, Long userId, Long userToAddId) {
         Band band = bandServiceValidation.getValidBand(bandId, "addUserToBand");
         User user = userService.addUserToBand(userId, userToAddId, band, "addUserToBand");
 
         band.getUserList().add(user);
         Band savedBand = bandRepository.save(band);
-        log.info("Band with id {} had user with id {} added. Method: {}", savedBand.getId(), user.getId(), "createBand");
+        log.info("Band with id {} had user with id {} added. Method: {}", savedBand.getId(), user.getId(), "addUserToBand");
 
         return modelMapper.map(savedBand, BandDTO.class);
-    }
-
-    @Override
-    public Band getValidBandForRehearsal(Long bandId, String methodName) {
-        return bandServiceValidation.getValidBand(bandId, "createRehearsal");
     }
 
     @Override
@@ -109,5 +95,15 @@ public class BandServiceImpl implements BandService{
         log.info("Band with id {} had user with id {} added. Method: {}", savedBand.getId(), user.getId(), "createBand");
 
         return modelMapper.map(savedBand, BandDTO.class);
+    }
+
+    @Override
+    public Band getValidBandForCreateRehearsal(Long bandId, String methodName) {
+        return bandServiceValidation.getValidBand(bandId, methodName);
+    }
+
+    @Override
+    public Band getValidBandForDeletePost(Long bandId, String methodName) {
+        return bandServiceValidation.getValidBand(bandId, methodName);
     }
 }

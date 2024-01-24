@@ -1,6 +1,8 @@
 package com.anghel.music_band_organizer.services.post;
 
+import com.anghel.music_band_organizer.exceptions.post.PostAlreadyExistsException;
 import com.anghel.music_band_organizer.exceptions.post.PostNotFoundException;
+import com.anghel.music_band_organizer.models.dtos.PostDTO;
 import com.anghel.music_band_organizer.models.entities.Post;
 import com.anghel.music_band_organizer.repository.PostRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -17,11 +19,11 @@ public class PostServiceValidationImpl implements PostServiceValidation{
     }
 
 //    @Override
-//    public void validatePostAlreadyExists(MessageDTO messageDTO) {
-//        Post post = postRepository.findMessageByMessageDateAndMessageTime(messageDTO.getMessageDate(), messageDTO.getMessageTime());
+//    public void validatePostAlreadyExists(PostDTO postDTO) {
+//        Post post = postRepository.findPostById(postDTO.getId());
 //
 //        if (post != null) {
-//            throw new PostAlreadyExistsException("A post with the date " + messageDTO.getMessageDate() + " and time " + messageDTO.getMessageTime() + " already exists.");
+//            throw new PostAlreadyExistsException("A post with the id " + messageDTO.getMessageDate() + " and time " + messageDTO.getMessageTime() + " already exists.");
 //        }
 //    }
 

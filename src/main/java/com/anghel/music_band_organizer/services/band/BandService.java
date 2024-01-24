@@ -15,11 +15,11 @@ public interface BandService {
 
     String deleteBandById(Long bandId);
 
-    String generateBandDescription(Long bandId);
-
     BandDTO addUserToBand(Long bandId, Long userId, Long userToAddId);
 
-    Band getValidBandForRehearsal(Long bandId, String methodName);
-
     BandDTO makeUserAdminInBand(Long bandId, Long userId, Long userToChangeRoleId);
+
+    Band getValidBandForCreateRehearsal(Long bandId, String methodName);
+
+    Band getValidBandForDeletePost(Long bandId, String methodName);
 }

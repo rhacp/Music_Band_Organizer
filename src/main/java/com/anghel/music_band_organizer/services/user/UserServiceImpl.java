@@ -157,4 +157,18 @@ public class UserServiceImpl implements UserService {
     public User sendMessage(Long userId, String methodName) {
         return userServiceValidation.getValidUser(userId,methodName);
     }
+
+    @Override
+    public User createRehearsal(Long userId, String methodName, Band band) {
+        User user = userServiceValidation.getValidUser(userId,methodName);
+        userServiceValidation.validateUserNotAdminInBandException(user, band);
+
+        return user;
+    }
+
+    @Override
+    public void checkUserInBandForDeletePost(Long userId, Band band, String methodName) {
+        User user = userServiceValidation.getValidUser(userId, methodName);
+        userServiceValidation.validateUserNotAdminInBandException(user, band);
+    }
 }

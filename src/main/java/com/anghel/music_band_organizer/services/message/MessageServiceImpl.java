@@ -35,6 +35,7 @@ public class MessageServiceImpl implements MessageService{
 
     @Override
     public MessageDTO sendMessage(MessageDTO messageDTO, Long fromUserId, Long toUserId) {
+        messageServiceValidation.validateMessageAlreadyExists(messageDTO);
         User fromUser = userService.sendMessage(fromUserId, "fromUserId");
         User toUser = userService.sendMessage(toUserId, "toUserId");
 

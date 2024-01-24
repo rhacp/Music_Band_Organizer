@@ -37,8 +37,9 @@ public class RehearsalServiceImpl implements RehearsalService{
 
     @Transactional
     @Override
-    public RehearsalDTO createRehearsal(RehearsalDTO rehearsalDTO, Long bandId) {
-        Band band = bandService.getValidBandForRehearsal(bandId, "createRehearsal");
+    public RehearsalDTO createRehearsal(RehearsalDTO rehearsalDTO, Long userId, Long bandId) {
+        Band band = bandService.getValidBandForCreateRehearsal(bandId, "createRehearsal");
+        userService.createRehearsal(userId, "createRehearsal", band);
         rehearsalServiceValidation.validateRehearsalAlreadyExists(rehearsalDTO);
 
         Rehearsal rehearsal = modelMapper.map(rehearsalDTO, Rehearsal.class);
@@ -52,7 +53,6 @@ public class RehearsalServiceImpl implements RehearsalService{
         log.info("Rehearsal with id {} inserted in db. Method: {}.", savedRehearsal.getId(), "createRehearsal");
 
         return modelMapper.map(savedRehearsal, RehearsalDTO.class);
-
     }
 
     @Transactional
