@@ -22,13 +22,13 @@ public class Band {
     @Column(name = "band_description")
     private String bandDescription;
 
-    @OneToMany(mappedBy = "rehearsalBand")
-    @JsonManagedReference(value = "rehearsal")
-    private List<Rehearsal> rehearsalList = new ArrayList<>();
-
     @OneToMany(mappedBy = "postBand")
     @JsonManagedReference(value = "post")
     private List<Post> postList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "rehearsalBand")
+    @JsonManagedReference(value = "rehearsal")
+    private List<Rehearsal> rehearsalList = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(

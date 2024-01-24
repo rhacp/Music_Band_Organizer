@@ -16,6 +16,15 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "content")
+    private String content;
+
+    @Column(name = "message_date")
+    private LocalDate messageDate;
+
+    @Column(name = "message_time")
+    private LocalTime messageTime;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "to_user", referencedColumnName = "id")
     @JsonBackReference(value = "toUser")
@@ -25,13 +34,4 @@ public class Message {
     @JoinColumn(name = "from_user", referencedColumnName = "id")
     @JsonBackReference(value = "fromUser")
     private User fromUser;
-
-    @Column(name = "content")
-    private String content;
-
-    @Column(name = "message_date")
-    private LocalDate messageDate;
-
-    @Column(name = "message_time")
-    private LocalTime messageTime;
 }

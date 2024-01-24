@@ -26,6 +26,9 @@ public class User {
     @Column(name = "last_name")
     private String lastName;
 
+    @Column(name = "description")
+    private String description;
+
     @Column(name = "birthday")
     private LocalDate birthday;
 
@@ -35,9 +38,6 @@ public class User {
     @Column(name = "stage_name")
     private String stageName;
 
-    @Column(name = "description")
-    private String description;
-
     @ElementCollection
     @CollectionTable(name = "user_past_experience",
             joinColumns = @JoinColumn(name = "user_id")
@@ -46,10 +46,6 @@ public class User {
     @Column(name = "past_experience")
     private Map<String, String> pastExperience = new LinkedHashMap<>();
 
-    @ManyToMany(mappedBy = "userList")
-    @JsonBackReference(value = "band")
-    private List<Band> bandList = new ArrayList<>();
-
     @ElementCollection
     @CollectionTable(name = "user_band_role",
             joinColumns = @JoinColumn(name = "user_id")
@@ -57,6 +53,10 @@ public class User {
     @MapKeyColumn(name = "user_role")
     @Column(name = "band_name")
     private Map<String, String> bandRole = new LinkedHashMap<>();
+
+    @ManyToMany(mappedBy = "userList")
+    @JsonBackReference(value = "band")
+    private List<Band> bandList = new ArrayList<>();
 
     @OneToMany(mappedBy = "toUser")
     @JsonManagedReference(value = "toUser")

@@ -22,13 +22,13 @@ public class RehearsalDTO {
     @RegexPattern(regexp = "([01]?[0-9]|2[0-3]):[0-5][0-9]", message = "Must be of format XX.XX and not null.")
     private String rehearsalTime;
 
-    @EnumAvailabilityPattern(anyOf = {"private", "public"})
-    private String rehearsalAvailability;
-
     @NotNull
     @Min(1)
     @Max(9)
     private Integer rehearsalDurationHours;
+
+    @EnumAvailabilityPattern(anyOf = {"private", "public"})
+    private String rehearsalAvailability;
 
     private Band rehearsalBand;
 }

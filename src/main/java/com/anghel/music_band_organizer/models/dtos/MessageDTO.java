@@ -11,11 +11,6 @@ public class MessageDTO {
 
     private Long id;
 
-    private User fromUser;
-
-
-    private User toUser;
-
     @NotBlank
     @Size(min = 3, max = 1000, message = "must be between 3 and 1000 characters")
     private String content;
@@ -25,4 +20,8 @@ public class MessageDTO {
 
     @RegexPattern(regexp = "([01]?[0-9]|2[0-3]):[0-5][0-9]", message = "Must be of format XX.XX and not null.")
     private String messageTime;
+
+    private User fromUser;
+
+    private User toUser;
 }

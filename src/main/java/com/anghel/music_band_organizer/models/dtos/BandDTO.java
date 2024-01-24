@@ -23,9 +23,9 @@ public class BandDTO {
     @Size(min = 3, max = 200, message = "must be between 3 and 30 characters")
     private String bandDescription;
 
-    private List<Rehearsal> rehearsalList = new ArrayList<>();
-
     private List<Post> postList = new ArrayList<>();
+
+    private List<Rehearsal> rehearsalList = new ArrayList<>();
 
     private List<User> userList = new ArrayList<>();
 }
