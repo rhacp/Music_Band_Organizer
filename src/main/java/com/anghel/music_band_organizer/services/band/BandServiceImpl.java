@@ -22,12 +22,11 @@ public class BandServiceImpl implements BandService{
     private final ModelMapper modelMapper;
     private final UserService userService;
 
-    public BandServiceImpl(BandRepository bandRepository, BandServiceValidation bandServiceValidation, ModelMapper modelMapper, UserService userService, OpenAIImpl openAI) {
+    public BandServiceImpl(BandRepository bandRepository, BandServiceValidation bandServiceValidation, ModelMapper modelMapper, UserService userService) {
         this.bandRepository = bandRepository;
         this.bandServiceValidation = bandServiceValidation;
         this.modelMapper = modelMapper;
         this.userService = userService;
-        this.openAI = openAI;
     }
 
     @Transactional
