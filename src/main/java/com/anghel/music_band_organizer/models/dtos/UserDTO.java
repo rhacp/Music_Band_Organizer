@@ -1,10 +1,10 @@
 package com.anghel.music_band_organizer.models.dtos;
 
 import com.anghel.music_band_organizer.models.entities.Band;
+import com.anghel.music_band_organizer.models.entities.Message;
 import com.anghel.music_band_organizer.validations.regex.RegexPattern;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
@@ -26,6 +26,7 @@ public class UserDTO {
     @Size(min = 3, max = 30, message = "Must be between 3 and 30 characters.")
     private String lastName;
 
+    @NotBlank
     @RegexPattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$", message = "Must be of format XXXX-XX-XX and not null.")
     private String birthday;
 
@@ -46,4 +47,8 @@ public class UserDTO {
     private List<Band> bandList = new ArrayList<>();
 
     private Map<String, String> bandRole = new LinkedHashMap<>();
+
+    private List<Message> toUserList = new ArrayList<>();
+
+    private List<Message> fromUserList = new ArrayList<>();
 }

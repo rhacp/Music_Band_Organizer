@@ -16,14 +16,14 @@ public class MessageServiceValidationImpl implements MessageServiceValidation{
 
     public MessageServiceValidationImpl(MessageRepository messageRepository) { this.messageRepository = messageRepository; }
 
-    @Override
-    public void validateMessageAlreadyExists(MessageDTO messageDTO) {
-        Message message = messageRepository.findMessageByMessageDateAndMessageTime(messageDTO.getMessageDate(), messageDTO.getMessageTime());
-
-        if (message != null) {
-            throw new MessageAlreadyExistsException("A rehearsal with the date " + messageDTO.getMessageDate() + " and time " + messageDTO.getMessageTime() + " already exists.");
-        }
-    }
+//    @Override
+//    public void validateMessageAlreadyExists(MessageDTO messageDTO) {
+//        Message message = messageRepository.findById(messageDTO.getMessageDate(), messageDTO.getMessageTime());
+//
+//        if (message != null) {
+//            throw new MessageAlreadyExistsException("A rehearsal with the date " + messageDTO.getMessageDate() + " and time " + messageDTO.getMessageTime() + " already exists.");
+//        }
+//    }
 
     @Override
     public Message getValidMessage(Long messageId, String methodName) {

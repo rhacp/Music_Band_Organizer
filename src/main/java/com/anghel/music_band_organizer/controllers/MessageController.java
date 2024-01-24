@@ -19,9 +19,9 @@ public class MessageController {
         this.messageService = messageService;
     }
 
-    @PostMapping
-    public ResponseEntity<RehearsalDTO> sendMessage(@Valid @RequestBody RehearsalDTO rehearsalDTO) {
-        return null;
+    @PostMapping("/users/{fromUserId}/{toUserId}")
+    public ResponseEntity<MessageDTO> sendMessage(@Valid @RequestBody MessageDTO messageDTO, @PathVariable Long toUserId, @PathVariable Long fromUserId) {
+        return ResponseEntity.ok(messageService.sendMessage(messageDTO, toUserId, fromUserId));
     }
 
     @GetMapping

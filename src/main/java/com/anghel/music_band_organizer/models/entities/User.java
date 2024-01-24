@@ -1,6 +1,7 @@
 package com.anghel.music_band_organizer.models.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -56,4 +57,12 @@ public class User {
     @MapKeyColumn(name = "user_role")
     @Column(name = "band_name")
     private Map<String, String> bandRole = new LinkedHashMap<>();
+
+    @OneToMany(mappedBy = "toUser")
+    @JsonManagedReference(value = "toUser")
+    private List<Message> toUserList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "fromUser")
+    @JsonManagedReference(value = "fromUser")
+    private List<Message> fromUserList = new ArrayList<>();
 }

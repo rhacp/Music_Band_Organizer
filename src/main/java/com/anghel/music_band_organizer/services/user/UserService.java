@@ -33,4 +33,6 @@ public interface UserService {
     User addUserToBand(Long userId, Long userToAddId, Band band, String methodName);
 
     User makeUserAdminInBand(Long userId, Long userToChangeRoleId, Band band, String methodName);
+
+    User sendMessage(Long userId, String methodName);
 }

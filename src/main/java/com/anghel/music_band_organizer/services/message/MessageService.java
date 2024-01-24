@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface MessageService {
 
-    MessageDTO createMessage();
+    MessageDTO sendMessage(MessageDTO messageDTO, Long toUserId, Long fromUserId);
 
     List<MessageDTO> getAllMessages();
 
