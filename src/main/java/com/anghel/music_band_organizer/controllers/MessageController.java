@@ -37,4 +37,9 @@ public class MessageController {
     public ResponseEntity<String> deleteMessageById(@PathVariable Long messageId) {
         return ResponseEntity.ok(messageService.deleteMessageById(messageId));
     }
+
+    @GetMapping("/users/{fromUser}/{toUser}")
+    public ResponseEntity<List<MessageDTO>> getConversationBetweenUsers(@PathVariable Long fromUser, @PathVariable Long toUser) {
+        return ResponseEntity.ok(messageService.getConversationBetweenUsers(fromUser, toUser));
+    }
 }

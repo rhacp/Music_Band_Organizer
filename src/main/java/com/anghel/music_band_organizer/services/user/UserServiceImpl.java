@@ -171,4 +171,9 @@ public class UserServiceImpl implements UserService {
         User user = userServiceValidation.getValidUser(userId, methodName);
         userServiceValidation.validateUserNotAdminInBandException(user, band);
     }
+
+    @Override
+    public User getUserForConversation(Long userId, String methodName) {
+        return userServiceValidation.getValidUser(userId, methodName);
+    }
 }

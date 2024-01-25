@@ -39,4 +39,6 @@ public interface UserService {
     void checkUserInBandForDeletePost(Long userId, Band band, String methodName);
 
     User createBand(Long userId, String bandName);
+
+    User getUserForConversation(Long userId, String methodName);
 }
