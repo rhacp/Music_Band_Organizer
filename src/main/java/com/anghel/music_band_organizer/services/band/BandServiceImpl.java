@@ -2,9 +2,10 @@ package com.anghel.music_band_organizer.services.band;
 
 import com.anghel.music_band_organizer.models.dtos.BandDTO;
 import com.anghel.music_band_organizer.models.entities.Band;
-import com.anghel.music_band_organizer.services.open_ai.OpenAIImpl;
+import com.anghel.music_band_organizer.models.entities.Mail;
 import com.anghel.music_band_organizer.models.entities.User;
 import com.anghel.music_band_organizer.repository.BandRepository;
+import com.anghel.music_band_organizer.services.mail.MailService;
 import com.anghel.music_band_organizer.services.user.UserService;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
@@ -21,12 +22,14 @@ public class BandServiceImpl implements BandService{
     private final BandServiceValidation bandServiceValidation;
     private final ModelMapper modelMapper;
     private final UserService userService;
+    private final MailService mailService;
 
-    public BandServiceImpl(BandRepository bandRepository, BandServiceValidation bandServiceValidation, ModelMapper modelMapper, UserService userService) {
+    public BandServiceImpl(BandRepository bandRepository, BandServiceValidation bandServiceValidation, ModelMapper modelMapper, UserService userService, MailService mailService) {
         this.bandRepository = bandRepository;
         this.bandServiceValidation = bandServiceValidation;
         this.modelMapper = modelMapper;
         this.userService = userService;
+        this.mailService = mailService;
     }
 
     @Transactional
@@ -81,6 +84,9 @@ public class BandServiceImpl implements BandService{
         band.getUserList().add(user);
         Band savedBand = bandRepository.save(band);
         log.info("Band with id {} had user with id {} added. Method: {}", savedBand.getId(), user.getId(), "addUserToBand");
+
+        Mail mail = mailService.prepareMailBand(savedBand, "addUserToBand");
+        mailService.sendMail(user.getEmail(), mail, "addUserToBand");
 
         return modelMapper.map(savedBand, BandDTO.class);
     }

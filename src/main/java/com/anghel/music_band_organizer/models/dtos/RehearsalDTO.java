@@ -27,6 +27,7 @@ public class RehearsalDTO {
     @Max(9)
     private Integer rehearsalDurationHours;
 
+    @NotBlank
     @EnumAvailabilityPattern(anyOf = {"private", "public"})
     private String rehearsalAvailability;
 

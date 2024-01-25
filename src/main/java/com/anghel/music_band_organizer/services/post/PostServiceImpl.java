@@ -40,7 +40,7 @@ public class PostServiceImpl implements PostService{
         userService.createRehearsal(userId, "createRehearsal", band);
 
         Post post = modelMapper.map(postDTO, Post.class);
-        if (Boolean.TRUE.equals(post.getUseOpenAIForDescription())) {
+        if (Boolean.TRUE.equals(post.getUseOpenAIForDescription()) || postDTO.getPostDescription() == null) {
             post.setPostDescription(openAI.chatGPT("Please generate a description for my social media music post release. Please don't use any quotation marks in your response. My band is called " + band.getBandName() + ", and the title for the post I decided on is " + post.getPostTitle() + ". Also, my music recording is titled " + post.getPostRecordingTitle() + ". Please answer using up to 100 tokens."));
         }
         post.setPostBand(band);
