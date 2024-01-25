@@ -1,9 +1,11 @@
 package com.anghel.music_band_organizer.services.message;
 
 import com.anghel.music_band_organizer.models.dtos.MessageDTO;
+import com.anghel.music_band_organizer.models.entities.Mail;
 import com.anghel.music_band_organizer.models.entities.Message;
 import com.anghel.music_band_organizer.models.entities.User;
 import com.anghel.music_band_organizer.repository.MessageRepository;
+import com.anghel.music_band_organizer.services.mail.MailService;
 import com.anghel.music_band_organizer.services.user.UserService;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
@@ -24,12 +26,14 @@ public class MessageServiceImpl implements MessageService{
     private final ModelMapper modelMapper;
     private final UserService userService;
     private final DateTimeFormatter formatter;
+    private final MailService mailService;
 
-    public MessageServiceImpl(MessageRepository messageRepository, MessageServiceValidation messageServiceValidation, ModelMapper modelMapper, UserService userService) {
+    public MessageServiceImpl(MessageRepository messageRepository, MessageServiceValidation messageServiceValidation, ModelMapper modelMapper, UserService userService, MailService mailService) {
         this.messageRepository = messageRepository;
         this.messageServiceValidation = messageServiceValidation;
         this.modelMapper = modelMapper;
         this.userService = userService;
+        this.mailService = mailService;
         this.formatter = DateTimeFormatter.ofPattern("HH:mm");
     }
 
@@ -47,6 +51,8 @@ public class MessageServiceImpl implements MessageService{
         Message savedMessage = messageRepository.save(message);
         log.info("Message with id {} inserted in db. Method: {}", savedMessage.getId(), "sendMessage");
 
+        Mail mail = mailService.prepareMailMessage(savedMessage.getToUser(), "sendMessage");
+        mailService.sendMail(savedMessage.getToUser().getEmail(), mail, "sendMessage");
         return modelMapper.map(savedMessage, MessageDTO.class);
     }
 

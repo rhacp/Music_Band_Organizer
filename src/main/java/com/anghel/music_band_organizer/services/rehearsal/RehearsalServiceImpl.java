@@ -2,9 +2,11 @@ package com.anghel.music_band_organizer.services.rehearsal;
 
 import com.anghel.music_band_organizer.models.dtos.RehearsalDTO;
 import com.anghel.music_band_organizer.models.entities.Band;
+import com.anghel.music_band_organizer.models.entities.Mail;
 import com.anghel.music_band_organizer.models.entities.Rehearsal;
 import com.anghel.music_band_organizer.repository.rehearsal.RehearsalRepository;
 import com.anghel.music_band_organizer.services.band.BandService;
+import com.anghel.music_band_organizer.services.mail.MailService;
 import com.anghel.music_band_organizer.services.user.UserService;
 import com.anghel.music_band_organizer.utils.enums.Availability;
 import com.anghel.music_band_organizer.utils.enums.State;
@@ -26,13 +28,15 @@ public class RehearsalServiceImpl implements RehearsalService{
     private final ModelMapper modelMapper;
     private final BandService bandService;
     private final UserService userService;
+    private final MailService mailService;
 
-    public RehearsalServiceImpl(RehearsalRepository rehearsalRepository, RehearsalServiceValidation rehearsalServiceValidation, ModelMapper modelMapper, BandService bandService, UserService userService) {
+    public RehearsalServiceImpl(RehearsalRepository rehearsalRepository, RehearsalServiceValidation rehearsalServiceValidation, ModelMapper modelMapper, BandService bandService, UserService userService, MailService mailService) {
         this.rehearsalRepository = rehearsalRepository;
         this.rehearsalServiceValidation = rehearsalServiceValidation;
         this.modelMapper = modelMapper;
         this.bandService = bandService;
         this.userService = userService;
+        this.mailService = mailService;
     }
 
     @Transactional
@@ -51,6 +55,10 @@ public class RehearsalServiceImpl implements RehearsalService{
 
         Rehearsal savedRehearsal = rehearsalRepository.save(rehearsal);
         log.info("Rehearsal with id {} inserted in db. Method: {}.", savedRehearsal.getId(), "createRehearsal");
+
+        Mail mail = mailService.prepareMailRehearsal(savedRehearsal, "createRehearsal");
+        band.getUserList()
+                .forEach(element -> mailService.sendMail(element.getEmail(), mail, "createRehearsal"));
 
         return modelMapper.map(savedRehearsal, RehearsalDTO.class);
     }
