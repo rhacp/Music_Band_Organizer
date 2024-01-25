@@ -13,4 +13,6 @@ public interface MessageService {
     MessageDTO getMessageById(Long messageId);
 
     String deleteMessageById(Long rehearsalId);
+
+    List<MessageDTO> getConversationBetweenUsers(Long fromUser, Long toUser);
 }
