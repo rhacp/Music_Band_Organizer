@@ -45,4 +45,6 @@ public interface UserService {
     User getUserForConversation(Long userId, String methodName);
 
     void checkUserAdminInBandForUpdateBand(Long userId, Band band, String methodName);
+
+    User changeUserToMemberInBand(Long userId, Long userToChangeRoleId, Band band, String methodName);
 }

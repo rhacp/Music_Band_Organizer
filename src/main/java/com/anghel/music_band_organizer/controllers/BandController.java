@@ -52,4 +52,9 @@ public class BandController {
     public ResponseEntity<BandDTO> updateBandById(@PathVariable Long bandId, @PathVariable Long userId, @RequestBody BandDTO bandDTO) {
         return ResponseEntity.ok(bandService.updateBandById(bandId, userId, bandDTO));
     }
+
+    @PutMapping("/{bandId}/users/{userId}/member/{userToChangeRoleId}")
+    public ResponseEntity<BandDTO> changeUserToMemberInBand(@PathVariable Long bandId, @PathVariable Long userId, @PathVariable Long userToChangeRoleId) {
+        return ResponseEntity.ok(bandService.changeUserToMemberInBand(bandId, userId, userToChangeRoleId));
+    }
 }
