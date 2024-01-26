@@ -105,14 +105,22 @@ public class BandServiceImpl implements BandService{
 
     @Override
     public BandDTO makeUserAdminInBand(Long bandId, Long userId, Long userToChangeRoleId) {
-        Band band = bandServiceValidation.getValidBand(bandId, "addUserToBand");
+        Band band = bandServiceValidation.getValidBand(bandId, "makeUserAdminInBand");
         User user = userService.makeUserAdminInBand(userId, userToChangeRoleId, band, "makeUserAdminInBand");
 
-        band.getUserList().add(user);
-        Band savedBand = bandRepository.save(band);
-        log.info("Band with id {} had user with id {} added. Method: {}", savedBand.getId(), user.getId(), "createBand");
+        log.info("Band with id {} had user with id {} added. Method: {}", band.getId(), user.getId(), "makeUserAdminInBand");
 
-        return modelMapper.map(savedBand, BandDTO.class);
+        return modelMapper.map(band, BandDTO.class);
+    }
+
+    @Override
+    public BandDTO changeUserToMemberInBand(Long bandId, Long userId, Long userToChangeRoleId) {
+        Band band = bandServiceValidation.getValidBand(bandId, "changeUserToMemberInBand");
+        User user = userService.changeUserToMemberInBand(userId, userToChangeRoleId, band, "changeUserToMemberInBand");
+
+        log.info("User with id {} was made admin in band {}. Method: {}", user.getId(), band.getBandName(), "changeUserToMemberInBand");
+
+        return modelMapper.map(band, BandDTO.class);
     }
 
     @Override

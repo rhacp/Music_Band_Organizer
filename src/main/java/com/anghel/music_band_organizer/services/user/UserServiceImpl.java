@@ -160,7 +160,7 @@ public class UserServiceImpl implements UserService {
 
         userToChangeRole.getBandRole().put(band.getBandName(), Role.ADMIN.getRoleLabel());
         User savedUser = userRepository.save(userToChangeRole);
-        log.info("User {} : {} had bandList and bandRole changed. Method: {}", savedUser.getId(), savedUser.getEmail(), "addUserToBand");
+        log.info("User {} : {} had the bandRole changed to ADMIN. Method: {}", savedUser.getId(), savedUser.getEmail(), "addUserToBand");
 
         return savedUser;
     }
@@ -193,6 +193,23 @@ public class UserServiceImpl implements UserService {
     public void checkUserAdminInBandForUpdateBand(Long userId, Band band, String methodName) {
         User user = userServiceValidation.getValidUser(userId, "checkUserAdminInBandForUpdateBand");
         userServiceValidation.validateUserNotAdminInBandException(user, band);
+    }
+
+    @Override
+    public User changeUserToMemberInBand(Long userId, Long userToChangeRoleId, Band band, String methodName) {
+        User user = userServiceValidation.getValidUser(userId, methodName);
+        User userToChangeRole = userServiceValidation.getValidUser(userToChangeRoleId, methodName);
+        userServiceValidation.validateUserDuplicateException(user, userToChangeRole);
+
+        userServiceValidation.validateUserNotInSpecificBandException(user, band);
+        userServiceValidation.validateUserNotAdminInBandException(user, band);
+        userServiceValidation.validateUserNotInSpecificBandException(userToChangeRole, band);
+
+        userToChangeRole.getBandRole().put(band.getBandName(), Role.MEMBER.getRoleLabel());
+        User savedUser = userRepository.save(userToChangeRole);
+        log.info("User {} : {} had bandRole changed to MEMBER. Method: {}", savedUser.getId(), savedUser.getEmail(), "addUserToBand");
+
+        return savedUser;
     }
 
     private void updateUserFromDTO(User user, UserDTO userDTO) {

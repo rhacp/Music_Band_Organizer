@@ -21,6 +21,8 @@ public interface BandService {
 
     BandDTO makeUserAdminInBand(Long bandId, Long userId, Long userToChangeRoleId);
 
+    BandDTO changeUserToMemberInBand(Long bandId, Long  userId, Long userToChangeRoleId);
+
     Band getValidBandForCreateRehearsal(Long bandId, String methodName);
 
     Band getValidBandForDeletePost(Long bandId, String methodName);
