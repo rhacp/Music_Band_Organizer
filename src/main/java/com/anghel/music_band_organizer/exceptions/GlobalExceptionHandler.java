@@ -4,6 +4,7 @@ import com.anghel.music_band_organizer.exceptions.band.BandAlreadyExistsExceptio
 import com.anghel.music_band_organizer.exceptions.band.BandNotFoundException;
 import com.anghel.music_band_organizer.exceptions.message.MessageAlreadyExistsException;
 import com.anghel.music_band_organizer.exceptions.message.MessageNotFoundException;
+import com.anghel.music_band_organizer.exceptions.open_ai.OpenAIException;
 import com.anghel.music_band_organizer.exceptions.post.PostAlreadyExistsException;
 import com.anghel.music_band_organizer.exceptions.post.PostNotFoundException;
 import com.anghel.music_band_organizer.exceptions.rehearsal.RehearsalAlreadyExistsException;
@@ -116,6 +117,12 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Object> handlePostNotFoundException(PostNotFoundException e) {
         log.info("PostNotFoundException thrown.");
         return getResponse(e, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(OpenAIException.class)
+    public ResponseEntity<Object> handleOpenAIException(OpenAIException e) {
+        log.info("OpenAIException thrown.");
+        return getResponse(e, HttpStatus.BAD_REQUEST);
     }
 
     private ResponseEntity<Object> getResponse(RuntimeException e, HttpStatus httpStatus) {

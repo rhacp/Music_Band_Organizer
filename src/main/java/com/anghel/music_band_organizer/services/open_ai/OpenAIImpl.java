@@ -1,5 +1,6 @@
 package com.anghel.music_band_organizer.services.open_ai;
 
+import com.anghel.music_band_organizer.exceptions.open_ai.OpenAIException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -43,7 +44,7 @@ public class OpenAIImpl implements OpenAI {
 
             return response;
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new OpenAIException("OpenAI Error: not able convert response from the buffer to JSON string.");
         }
     }
 
@@ -68,7 +69,7 @@ public class OpenAIImpl implements OpenAI {
             return new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new OpenAIException("OpenAI Error: not able to get the buffered response (make the call).");
         }
     }
 
