@@ -36,7 +36,7 @@ public class BandServiceImpl implements BandService{
     @Override
     public BandDTO createBand(BandDTO bandDTO, Long userId) {
         bandServiceValidation.validateBandAlreadyExists(bandDTO);
-        User user = userService.createBand(userId, bandDTO.getBandName());
+        User user = userService.makeUserAdminForCreateBand(userId, bandDTO.getBandName(), "createBand");
 
         Band band = modelMapper.map(bandDTO, Band.class);
         band.getUserList().add(user);
@@ -74,6 +74,18 @@ public class BandServiceImpl implements BandService{
         log.info("Band with id {} deleted. Method: {}", bandId, "deleteBandById");
 
         return "Band with id " + bandId + " deleted.";
+    }
+
+    @Override
+    public BandDTO updateBandById(Long bandId, Long userId, BandDTO bandDTO) {
+        Band band = bandServiceValidation.getValidBand(bandId, "updateBandById");
+        userService.checkUserAdminInBandForUpdateBand(userId, band, "updateBandById");
+
+        band.setBandDescription(bandDTO.getBandDescription());
+        Band savedBand = bandRepository.save(band);
+        log.info("Band with id {} updated in db. Method: {}", savedBand.getId(), "updateBandById");
+
+        return modelMapper.map(savedBand, BandDTO.class);
     }
 
     @Override

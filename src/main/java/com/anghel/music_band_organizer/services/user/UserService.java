@@ -18,6 +18,8 @@ public interface UserService {
 
     String deleteUserById(Long userId);
 
+    UserDTO updateUserById(Long userId, UserDTO userDTO);
+
     List<UserDTO> getFilteredUsers(Long userId,
                                    String firstName,
                                    String lastName,
@@ -38,7 +40,9 @@ public interface UserService {
 
     void checkUserInBandForDeletePost(Long userId, Band band, String methodName);
 
-    User createBand(Long userId, String bandName);
+    User makeUserAdminForCreateBand(Long userId, String bandName, String methodName);
 
     User getUserForConversation(Long userId, String methodName);
+
+    void checkUserAdminInBandForUpdateBand(Long userId, Band band, String methodName);
 }

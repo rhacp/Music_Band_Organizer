@@ -70,7 +70,7 @@ public class UserServiceValidationImpl implements UserServiceValidation {
     @Override
     public void validateUserAlreadyInSpecificBandException(User user, Band band) {
         if (user.getBandList().contains(band)) {
-            throw new UserAlreadyInSpecificBandException("User with id " + user.getId() + " already memeber of band " + band.getId() + ".");
+            throw new UserAlreadyInSpecificBandException("User with id " + user.getId() + " already member of band " + band.getId() + ".");
         }
     }
 }
