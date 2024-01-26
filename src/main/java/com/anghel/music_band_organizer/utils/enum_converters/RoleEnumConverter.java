@@ -1,6 +1,5 @@
 package com.anghel.music_band_organizer.utils.enum_converters;
 
-
 import com.anghel.music_band_organizer.utils.enums.Role;
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
