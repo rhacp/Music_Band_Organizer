@@ -1,4 +1,4 @@
-# Music Band Organizer
+# Musicians Social Platform
 
 Board regarding the music band organizer Java app.
 
