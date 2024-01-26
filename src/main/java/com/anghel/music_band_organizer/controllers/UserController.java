@@ -47,4 +47,9 @@ public class UserController {
                                                           @RequestParam(required = false) String stageName) {
         return ResponseEntity.ok(userService.getFilteredUsers(userId, firstName, lastName, email, birthday, pastExperience, stageName));
     }
+
+    @PutMapping("/{userId}")
+    public ResponseEntity<UserDTO> updateUserById(@PathVariable Long userId, @RequestBody UserDTO userDTO) {
+        return ResponseEntity.ok(userService.updateUserById(userId, userDTO));
+    }
 }

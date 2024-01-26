@@ -18,7 +18,7 @@ public class BandController {
         this.bandService = bandService;
     }
 
-    @PostMapping("/{userId}")
+    @PostMapping("/users/{userId}")
     public ResponseEntity<BandDTO> createBand(@Valid @RequestBody BandDTO bandDTO, @PathVariable Long userId) {
         return ResponseEntity.ok(bandService.createBand(bandDTO, userId));
     }
@@ -46,5 +46,10 @@ public class BandController {
     @PutMapping("/{bandId}/users/{userId}/admin/{userToChangeRoleId}")
     public ResponseEntity<BandDTO> makeUserAdminInBand(@PathVariable Long bandId, @PathVariable Long userId, @PathVariable Long userToChangeRoleId) {
         return ResponseEntity.ok(bandService.makeUserAdminInBand(bandId, userId, userToChangeRoleId));
+    }
+
+    @PutMapping("/{bandId}/users/{userId}")
+    public ResponseEntity<BandDTO> updateBandById(@PathVariable Long bandId, @PathVariable Long userId, @RequestBody BandDTO bandDTO) {
+        return ResponseEntity.ok(bandService.updateBandById(bandId, userId, bandDTO));
     }
 }

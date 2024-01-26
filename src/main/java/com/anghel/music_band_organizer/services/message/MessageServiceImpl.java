@@ -51,8 +51,8 @@ public class MessageServiceImpl implements MessageService{
         Message savedMessage = messageRepository.save(message);
         log.info("Message with id {} inserted in db. Method: {}", savedMessage.getId(), "sendMessage");
 
-//        Mail mail = mailService.prepareMailMessage(savedMessage.getToUser(), "sendMessage");
-//        mailService.sendMail(savedMessage.getToUser().getEmail(), mail, "sendMessage");
+        Mail mail = mailService.prepareMailMessage(savedMessage.getToUser(), "sendMessage");
+        mailService.sendMail(savedMessage.getToUser().getEmail(), mail, "sendMessage");
 
         return modelMapper.map(savedMessage, MessageDTO.class);
     }

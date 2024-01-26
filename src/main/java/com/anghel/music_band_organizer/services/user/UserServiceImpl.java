@@ -34,6 +34,7 @@ public class UserServiceImpl implements UserService {
         userServiceValidation.validateUserAlreadyExists(userDTO);
 
         User user = modelMapper.map(userDTO, User.class);
+        user.setBirthday(LocalDate.parse(userDTO.getBirthday()));
         User savedUser = userRepository.save(user);
         log.info("User {} : {} inserted in db. Method: {}", savedUser.getId(), savedUser.getEmail(), "createUser");
 
@@ -70,6 +71,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserDTO updateUserById(Long userId, UserDTO userDTO) {
+        User user = userServiceValidation.getValidUser(userId, "updateUser");
+
+        updateUserFromDTO(user, userDTO);
+        User savedUser = userRepository.save(user);
+        log.info("User {} : {} updated in db. Method: {}", savedUser.getId(), savedUser.getEmail(), "updateUser");
+
+        return modelMapper.map(savedUser, UserDTO.class);
+    }
+
+    @Override
     public List<UserDTO> getFilteredUsers(Long userId,
                                           String firstName,
                                           String lastName,
@@ -100,8 +112,8 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public User createBand(Long userId, String bandName) {
-        User user = userServiceValidation.getValidUser(userId, "setUserBandAndRole");
+    public User makeUserAdminForCreateBand(Long userId, String bandName, String methodName) {
+        User user = userServiceValidation.getValidUser(userId, methodName);
 
         user.getBandRole().put(bandName, Role.ADMIN.getRoleLabel());
         User savedUser = userRepository.save(user);
@@ -175,5 +187,32 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserForConversation(Long userId, String methodName) {
         return userServiceValidation.getValidUser(userId, methodName);
+    }
+
+    @Override
+    public void checkUserAdminInBandForUpdateBand(Long userId, Band band, String methodName) {
+        User user = userServiceValidation.getValidUser(userId, "checkUserAdminInBandForUpdateBand");
+        userServiceValidation.validateUserNotAdminInBandException(user, band);
+    }
+
+    private void updateUserFromDTO(User user, UserDTO userDTO) {
+        if (userDTO.getFirstName() != null) {
+            user.setFirstName(userDTO.getFirstName());
+        }
+        if (userDTO.getLastName() != null) {
+            user.setLastName(userDTO.getLastName());
+        }
+        if (userDTO.getBirthday() != null) {
+            user.setBirthday(LocalDate.parse(userDTO.getBirthday()));
+        }
+        if (userDTO.getStageName() != null) {
+            user.setStageName(userDTO.getStageName());
+        }
+        if (userDTO.getDescription() != null) {
+            user.setDescription(userDTO.getDescription());
+        }
+        if (userDTO.getPastExperience() != null) {
+            user.setPastExperience(userDTO.getPastExperience());
+        }
     }
 }
