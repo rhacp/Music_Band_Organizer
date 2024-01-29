@@ -41,7 +41,7 @@ The releases will be in the form of a post that the rest of the users will see i
 
 Within the application, members will be able to send each other messages and see previous conversations in chronological order.
 
-At the same time, I mention that users will be notified by email when they are added to a band or when a rehearsal is created.
+At the same time, users will be notified by email when they are added to a band or when a rehearsal is created.
 
 ---
 
