@@ -1,6 +1,7 @@
 package com.anghel.music_band_organizer.controllers;
 
-import com.anghel.music_band_organizer.models.dtos.BandDTO;
+import com.anghel.music_band_organizer.models.dtos.band.BandDTO;
+import com.anghel.music_band_organizer.models.dtos.band.GetAllBandsDTO;
 import com.anghel.music_band_organizer.services.band.BandService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +25,7 @@ public class BandController {
     }
 
     @GetMapping
-    public ResponseEntity<List<BandDTO>> getAllBands() {
+    public ResponseEntity<List<GetAllBandsDTO>> getAllBands() {
         return ResponseEntity.ok(bandService.getAllBands());
     }
 

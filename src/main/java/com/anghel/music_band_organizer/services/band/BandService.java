@@ -1,6 +1,7 @@
 package com.anghel.music_band_organizer.services.band;
 
-import com.anghel.music_band_organizer.models.dtos.BandDTO;
+import com.anghel.music_band_organizer.models.dtos.band.BandDTO;
+import com.anghel.music_band_organizer.models.dtos.band.GetAllBandsDTO;
 import com.anghel.music_band_organizer.models.entities.Band;
 
 import java.util.List;
@@ -9,7 +10,7 @@ public interface BandService {
 
     BandDTO createBand(BandDTO bandDTO, Long userId);
 
-    List<BandDTO> getAllBands();
+    List<GetAllBandsDTO> getAllBands();
 
     BandDTO getBandById(Long bandId);
 

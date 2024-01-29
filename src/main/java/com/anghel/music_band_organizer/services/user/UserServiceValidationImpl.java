@@ -1,7 +1,7 @@
 package com.anghel.music_band_organizer.services.user;
 
 import com.anghel.music_band_organizer.exceptions.user.*;
-import com.anghel.music_band_organizer.models.dtos.UserDTO;
+import com.anghel.music_band_organizer.models.dtos.user.UserDTO;
 import com.anghel.music_band_organizer.models.entities.Band;
 import com.anghel.music_band_organizer.models.entities.User;
 import com.anghel.music_band_organizer.repository.user.UserRepository;
@@ -9,8 +9,6 @@ import com.anghel.music_band_organizer.utils.enums.Role;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-
-import java.util.Map;
 
 @Slf4j
 @Component

@@ -2,7 +2,7 @@ package com.anghel.music_band_organizer.services.band;
 
 import com.anghel.music_band_organizer.exceptions.band.BandAlreadyExistsException;
 import com.anghel.music_band_organizer.exceptions.band.BandNotFoundException;
-import com.anghel.music_band_organizer.models.dtos.BandDTO;
+import com.anghel.music_band_organizer.models.dtos.band.BandDTO;
 import com.anghel.music_band_organizer.models.entities.Band;
 import com.anghel.music_band_organizer.repository.BandRepository;
 import lombok.extern.slf4j.Slf4j;

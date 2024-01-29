@@ -1,6 +1,7 @@
 package com.anghel.music_band_organizer.controllers;
 
-import com.anghel.music_band_organizer.models.dtos.RehearsalDTO;
+import com.anghel.music_band_organizer.models.dtos.rehearsal.GetAllRehearsalsDTO;
+import com.anghel.music_band_organizer.models.dtos.rehearsal.RehearsalDTO;
 import com.anghel.music_band_organizer.services.rehearsal.RehearsalService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +25,7 @@ public class RehearsalController {
     }
 
     @GetMapping
-    public ResponseEntity<List<RehearsalDTO>> getRehearsals() {
+    public ResponseEntity<List<GetAllRehearsalsDTO>> getRehearsals() {
         return ResponseEntity.ok(rehearsalService.getAllRehearsals());
     }
 

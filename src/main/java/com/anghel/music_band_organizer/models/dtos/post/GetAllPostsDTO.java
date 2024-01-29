@@ -1,13 +1,14 @@
-package com.anghel.music_band_organizer.models.dtos;
+package com.anghel.music_band_organizer.models.dtos.post;
 
 import com.anghel.music_band_organizer.models.entities.Band;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
-public class PostDTO {
+public class GetAllPostsDTO {
 
     private Long id;
 
@@ -29,5 +30,6 @@ public class PostDTO {
     @NotNull
     private Boolean useOpenAIForDescription;
 
+    @JsonIgnore
     private Band postBand;
 }

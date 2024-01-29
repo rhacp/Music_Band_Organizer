@@ -1,6 +1,7 @@
 package com.anghel.music_band_organizer.services.post;
 
-import com.anghel.music_band_organizer.models.dtos.PostDTO;
+import com.anghel.music_band_organizer.models.dtos.post.GetAllPostsDTO;
+import com.anghel.music_band_organizer.models.dtos.post.PostDTO;
 import com.anghel.music_band_organizer.models.entities.Band;
 import com.anghel.music_band_organizer.models.entities.Post;
 import com.anghel.music_band_organizer.repository.PostRepository;
@@ -53,12 +54,12 @@ public class PostServiceImpl implements PostService{
 
     @Transactional
     @Override
-    public List<PostDTO> getAllPosts() {
+    public List<GetAllPostsDTO> getAllPosts() {
        List<Post> postList = postRepository.findAll();
        log.info("Post list retrieved. Method: {}.", "getAllBands");
 
        return postList.stream()
-               .map(post -> modelMapper.map(post, PostDTO.class))
+               .map(post -> modelMapper.map(post, GetAllPostsDTO.class))
                .toList();
     }
 

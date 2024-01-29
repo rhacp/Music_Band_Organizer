@@ -1,6 +1,7 @@
 package com.anghel.music_band_organizer.services.user;
 
-import com.anghel.music_band_organizer.models.dtos.UserDTO;
+import com.anghel.music_band_organizer.models.dtos.user.GetAllUsersDTO;
+import com.anghel.music_band_organizer.models.dtos.user.UserDTO;
 import com.anghel.music_band_organizer.models.entities.Band;
 import com.anghel.music_band_organizer.models.entities.Rehearsal;
 import com.anghel.music_band_organizer.models.entities.User;
@@ -43,12 +44,12 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public List<UserDTO> getAllUsers() {
+    public List<GetAllUsersDTO> getAllUsers() {
         List<User> userList = userRepository.findAll();
         log.info("User list retrieved. Method: {}.", "getAllUsers");
 
         return userList.stream()
-                .map(user -> modelMapper.map(user, UserDTO.class))
+                .map(user -> modelMapper.map(user, GetAllUsersDTO.class))
                 .toList();
     }
 

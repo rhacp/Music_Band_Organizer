@@ -1,6 +1,7 @@
 package com.anghel.music_band_organizer.services.message;
 
-import com.anghel.music_band_organizer.models.dtos.MessageDTO;
+import com.anghel.music_band_organizer.models.dtos.message.GetAllMessagesDTO;
+import com.anghel.music_band_organizer.models.dtos.message.MessageDTO;
 
 import java.util.List;
 
@@ -8,7 +9,7 @@ public interface MessageService {
 
     MessageDTO sendMessage(MessageDTO messageDTO, Long fromUserId, Long toUserId);
 
-    List<MessageDTO> getAllMessages();
+    List<GetAllMessagesDTO> getAllMessages();
 
     MessageDTO getMessageById(Long messageId);
 
