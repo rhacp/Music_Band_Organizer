@@ -26,6 +26,7 @@ public interface UserServiceValidation {
      * Check if the specified user is part of the specified band. In case it does not, throws exception.
      * @param user user to check
      * @param band band to check
+     * @exception com.anghel.music_band_organizer.exceptions.user.UserNotInSpecificBandException if user not part of band
      */
     void validateUserNotInSpecificBandException(User user, Band band);
 
@@ -33,6 +34,7 @@ public interface UserServiceValidation {
      * Check if the specified user is ADMIN in the specified band. In case it isn't, throws exception.
      * @param user user to check
      * @param band band to check
+     * @exception com.anghel.music_band_organizer.exceptions.user.UserNotSpecificRoleInBandException if user not admin in band
      */
     void validateUserNotAdminInBandException(User user, Band band);
 
@@ -40,6 +42,7 @@ public interface UserServiceValidation {
      * Check if the first user is the same as the second user. If it is, throws exception.
      * @param user user to check
      * @param secondUser second user to check
+     * @exception com.anghel.music_band_organizer.exceptions.user.UserDuplicateException if users are the same
      */
     void validateUserDuplicateException(User user, User secondUser);
 
@@ -47,6 +50,15 @@ public interface UserServiceValidation {
      * Check if the user is already part of the specified band. If it is, throws exception.
      * @param user user to check
      * @param band band to check
+     * @exception com.anghel.music_band_organizer.exceptions.user.UserAlreadyInSpecificBandException if user is already part of band
      */
     void validateUserAlreadyInSpecificBandException(User user, Band band);
+
+    /**
+     * Check if the specified user is OWNER in the specified band. In case it isn't, throws exception.
+     * @param user user to check
+     * @param band band to check
+     * @exception com.anghel.music_band_organizer.exceptions.user.UserNotSpecificRoleInBandException if user not owner in band
+     */
+    void validateUserNotOwnerInBandException(User user, Band band);
 }

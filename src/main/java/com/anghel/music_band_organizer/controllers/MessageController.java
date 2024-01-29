@@ -40,7 +40,7 @@ public class MessageController {
     }
 
     @GetMapping("/users/{fromUser}/{toUser}")
-    public ResponseEntity<List<MessageDTO>> getConversationBetweenUsers(@PathVariable Long fromUser, @PathVariable Long toUser) {
+    public ResponseEntity<List<GetAllMessagesDTO>> getConversationBetweenUsers(@PathVariable Long fromUser, @PathVariable Long toUser) {
         return ResponseEntity.ok(messageService.getConversationBetweenUsers(fromUser, toUser));
     }
 }

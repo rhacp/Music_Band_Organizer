@@ -3,6 +3,7 @@ package com.anghel.music_band_organizer.services.rehearsal;
 import com.anghel.music_band_organizer.exceptions.rehearsal.RehearsalAlreadyExistsException;
 import com.anghel.music_band_organizer.exceptions.rehearsal.RehearsalNotFoundException;
 import com.anghel.music_band_organizer.models.dtos.rehearsal.RehearsalDTO;
+import com.anghel.music_band_organizer.models.entities.Band;
 import com.anghel.music_band_organizer.models.entities.Rehearsal;
 import com.anghel.music_band_organizer.repository.rehearsal.RehearsalRepository;
 import jakarta.transaction.Transactional;
@@ -22,11 +23,11 @@ public class RehearsalServiceValidationImpl implements RehearsalServiceValidatio
 
     @Transactional
     @Override
-    public void validateRehearsalAlreadyExists(RehearsalDTO rehearsalDTO) {
-        Rehearsal rehearsal = rehearsalRepository.findByRehearsalDateAndRehearsalTime(LocalDate.parse(rehearsalDTO.getRehearsalDate()), LocalTime.parse(rehearsalDTO.getRehearsalTime()));
+    public void validateRehearsalAlreadyExists(RehearsalDTO rehearsalDTO, Band band) {
+        Rehearsal rehearsal = rehearsalRepository.findRehearsalByRehearsalDateAndRehearsalTimeAndRehearsalBand(LocalDate.parse(rehearsalDTO.getRehearsalDate()), LocalTime.parse(rehearsalDTO.getRehearsalTime()), band);
 
         if (rehearsal != null) {
-            throw new RehearsalAlreadyExistsException("A rehearsal with the date " + rehearsalDTO.getRehearsalDate() + " and time " + rehearsalDTO.getRehearsalTime() + " already exists.");
+            throw new RehearsalAlreadyExistsException("A rehearsal with the date " + rehearsalDTO.getRehearsalDate() + " and time " + rehearsalDTO.getRehearsalTime() + " already exists for band " + band.getBandName() + " with id " + band.getId() + ".");
         }
     }
 

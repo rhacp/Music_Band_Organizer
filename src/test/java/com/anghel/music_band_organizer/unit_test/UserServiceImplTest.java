@@ -53,14 +53,14 @@ class UserServiceImplTest {
         userDTO.setFirstName("Maria");
         userDTO.setLastName("Anton");
         userDTO.setEmail("crin@gmail.com");
-        userDTO.setBirthday(LocalDate.parse("1998-03-11"));
+        userDTO.setBirthday("1998-03-11");
 
         UserDTO returnedUserDTO = new UserDTO();
         returnedUserDTO.setId(1L);
         returnedUserDTO.setFirstName("Maria");
         returnedUserDTO.setLastName("Anton");
         returnedUserDTO.setEmail("crin@gmail.com");
-        returnedUserDTO.setBirthday(LocalDate.parse("1998-03-11"));
+        returnedUserDTO.setBirthday("1998-03-11");
 
         when(modelMapper.map(returnedUserDTO, User.class)).thenReturn(user);
         when(modelMapper.map(savedUser, UserDTO.class)).thenReturn(returnedUserDTO);

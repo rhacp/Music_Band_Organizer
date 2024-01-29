@@ -77,7 +77,7 @@ public interface UserService {
 
     void checkUserInBandForDeletePost(Long userId, Band band, String methodName);
 
-    User makeUserAdminForCreateBand(Long userId, String bandName, String methodName);
+    User makeUserOwnerForCreateBand(Long userId, String bandName, String methodName);
 
     User getUserForConversation(Long userId, String methodName);
 

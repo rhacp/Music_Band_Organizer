@@ -2,12 +2,14 @@ package com.anghel.music_band_organizer.services.open_ai;
 
 import com.anghel.music_band_organizer.exceptions.open_ai.OpenAIException;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URI;
 
+@Profile("RHACP")
 @Service
 public class OpenAIImpl implements OpenAI {
 
