@@ -37,7 +37,7 @@ The band will be an isolated group of musicians. Within it, members will have th
 
 Rehearsals can be private (only band members will participate) or public (the rest of the users will see the time and date of the rehearsal and will be able to participate).
 
-The releases will be in the form of a post/posts that the rest of the users will see in the application (in a newsfeed in my view). These will give the band (which creates the post) the opportunity to create a description for the post using ChatGTP based on the name of the band, the description of the band and the name of the recording they will post.
+The releases will be in the form of a post that the rest of the users will see in the application (in a newsfeed in my view). These will give the band (which creates the post) the opportunity to create a description for the post using ChatGTP based on the name of the band, the description of the band and the name of the recording they will post.
 
 Within the application, members will be able to send each other messages and see previous conversations in chronological order.
 
