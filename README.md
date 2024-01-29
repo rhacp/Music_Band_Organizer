@@ -15,6 +15,21 @@ Board regarding the music band organizer Java app.
 
 ---
 
+# Tech Stack
+
+
+* Java 21
+* Spring Boot 3.2.1
+* Maven
+* Hibernate
+* PostgreSQL
+* Lombok
+* Mockito
+* Gmail SMTP
+* Swagger
+
+---
+
 This project is a social media platform for musicians. They can create profiles, search for other musicians according to multiple criteria and send each other messages, eventually forming a band.
 
 The band will be an isolated group of musicians. Within it, members will have three roles (OWNER, ADMIN and MEMBER) and will be able to easily plan and organize rehearsals and releases for songs, EPs or albums that will later be seen by the rest of the platform members.
