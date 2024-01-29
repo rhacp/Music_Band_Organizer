@@ -15,7 +15,7 @@ Music band organizer app.
 
 ---
 
-# Tech Stack
+### Tech Stack
 
 
 * Java 21
