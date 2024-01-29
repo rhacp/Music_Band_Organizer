@@ -1,6 +1,7 @@
 package com.anghel.music_band_organizer.services.message;
 
-import com.anghel.music_band_organizer.models.dtos.MessageDTO;
+import com.anghel.music_band_organizer.models.dtos.message.GetAllMessagesDTO;
+import com.anghel.music_band_organizer.models.dtos.message.MessageDTO;
 import com.anghel.music_band_organizer.models.entities.Mail;
 import com.anghel.music_band_organizer.models.entities.Message;
 import com.anghel.music_band_organizer.models.entities.User;
@@ -59,12 +60,12 @@ public class MessageServiceImpl implements MessageService{
 
     @Transactional
     @Override
-    public List<MessageDTO> getAllMessages() {
+    public List<GetAllMessagesDTO> getAllMessages() {
         List<Message> messageList = messageRepository.findAll();
         log.info("Message list retrieved. Method {}.", "getAllRehearsals");
 
         return messageList.stream()
-                .map(message -> modelMapper.map(message, MessageDTO.class))
+                .map(message -> modelMapper.map(message, GetAllMessagesDTO.class))
                 .toList();
     }
 

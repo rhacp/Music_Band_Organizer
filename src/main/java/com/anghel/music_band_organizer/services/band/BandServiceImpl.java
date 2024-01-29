@@ -1,6 +1,7 @@
 package com.anghel.music_band_organizer.services.band;
 
-import com.anghel.music_band_organizer.models.dtos.BandDTO;
+import com.anghel.music_band_organizer.models.dtos.band.BandDTO;
+import com.anghel.music_band_organizer.models.dtos.band.GetAllBandsDTO;
 import com.anghel.music_band_organizer.models.entities.Band;
 import com.anghel.music_band_organizer.models.entities.Mail;
 import com.anghel.music_band_organizer.models.entities.User;
@@ -48,12 +49,12 @@ public class BandServiceImpl implements BandService{
 
     @Transactional
     @Override
-    public List<BandDTO> getAllBands() {
+    public List<GetAllBandsDTO> getAllBands() {
         List<Band> bandList = bandRepository.findAll();
         log.info("Band list retrieved. Method: {}.", "getAllBands");
 
         return bandList.stream()
-                .map(band -> modelMapper.map(band, BandDTO.class))
+                .map(band -> modelMapper.map(band, GetAllBandsDTO.class))
                 .toList();
     }
 

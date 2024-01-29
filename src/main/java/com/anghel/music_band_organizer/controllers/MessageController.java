@@ -1,6 +1,7 @@
 package com.anghel.music_band_organizer.controllers;
 
-import com.anghel.music_band_organizer.models.dtos.MessageDTO;
+import com.anghel.music_band_organizer.models.dtos.message.GetAllMessagesDTO;
+import com.anghel.music_band_organizer.models.dtos.message.MessageDTO;
 import com.anghel.music_band_organizer.services.message.MessageService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +25,7 @@ public class MessageController {
     }
 
     @GetMapping
-    public ResponseEntity<List<MessageDTO>> getMessages() {
+    public ResponseEntity<List<GetAllMessagesDTO>> getMessages() {
         return ResponseEntity.ok(messageService.getAllMessages());
     }
 

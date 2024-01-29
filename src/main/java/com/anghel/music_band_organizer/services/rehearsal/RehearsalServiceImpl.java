@@ -1,6 +1,7 @@
 package com.anghel.music_band_organizer.services.rehearsal;
 
-import com.anghel.music_band_organizer.models.dtos.RehearsalDTO;
+import com.anghel.music_band_organizer.models.dtos.rehearsal.GetAllRehearsalsDTO;
+import com.anghel.music_band_organizer.models.dtos.rehearsal.RehearsalDTO;
 import com.anghel.music_band_organizer.models.entities.Band;
 import com.anghel.music_band_organizer.models.entities.Mail;
 import com.anghel.music_band_organizer.models.entities.Rehearsal;
@@ -65,12 +66,12 @@ public class RehearsalServiceImpl implements RehearsalService{
 
     @Transactional
     @Override
-    public List<RehearsalDTO> getAllRehearsals() {
+    public List<GetAllRehearsalsDTO> getAllRehearsals() {
         List<Rehearsal> rehearsalList = rehearsalRepository.findAll();
         log.info("Rehearsal list retrieved. Method {}.", "getAllRehearsals");
 
         return rehearsalList.stream()
-                .map(rehearsal -> modelMapper.map(rehearsal, RehearsalDTO.class))
+                .map(rehearsal -> modelMapper.map(rehearsal, GetAllRehearsalsDTO.class))
                 .toList();
     }
 

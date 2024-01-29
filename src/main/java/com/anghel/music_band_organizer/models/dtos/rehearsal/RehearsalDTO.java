@@ -1,4 +1,4 @@
-package com.anghel.music_band_organizer.models.dtos;
+package com.anghel.music_band_organizer.models.dtos.rehearsal;
 
 import com.anghel.music_band_organizer.models.entities.Band;
 import com.anghel.music_band_organizer.utils.enums.State;

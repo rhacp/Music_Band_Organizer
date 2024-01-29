@@ -1,8 +1,6 @@
 package com.anghel.music_band_organizer.services.post;
 
-import com.anghel.music_band_organizer.exceptions.post.PostAlreadyExistsException;
 import com.anghel.music_band_organizer.exceptions.post.PostNotFoundException;
-import com.anghel.music_band_organizer.models.dtos.PostDTO;
 import com.anghel.music_band_organizer.models.entities.Post;
 import com.anghel.music_band_organizer.repository.PostRepository;
 import lombok.extern.slf4j.Slf4j;

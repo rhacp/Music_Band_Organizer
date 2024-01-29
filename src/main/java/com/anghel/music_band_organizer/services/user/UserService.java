@@ -1,6 +1,7 @@
 package com.anghel.music_band_organizer.services.user;
 
-import com.anghel.music_band_organizer.models.dtos.UserDTO;
+import com.anghel.music_band_organizer.models.dtos.user.GetAllUsersDTO;
+import com.anghel.music_band_organizer.models.dtos.user.UserDTO;
 import com.anghel.music_band_organizer.models.entities.Band;
 import com.anghel.music_band_organizer.models.entities.Rehearsal;
 import com.anghel.music_band_organizer.models.entities.User;
@@ -10,9 +11,18 @@ import java.util.List;
 
 public interface UserService {
 
+    /**
+     * Creates a User based on DTO.
+     * @param userDTO
+     * @return UserDTO of the saved user
+     */
     UserDTO createUser(UserDTO userDTO);
 
-    List<UserDTO> getAllUsers();
+    /**
+     * Returns all users from DB.
+     * @return UserDTO List
+     */
+    List<GetAllUsersDTO> getAllUsers();
 
     UserDTO getUserById(Long userId);
 

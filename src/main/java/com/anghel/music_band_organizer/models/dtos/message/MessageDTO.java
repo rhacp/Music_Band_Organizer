@@ -1,4 +1,4 @@
-package com.anghel.music_band_organizer.models.dtos;
+package com.anghel.music_band_organizer.models.dtos.message;
 
 import com.anghel.music_band_organizer.models.entities.User;
 import com.anghel.music_band_organizer.validations.regex.RegexPattern;

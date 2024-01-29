@@ -1,4 +1,4 @@
-package com.anghel.music_band_organizer.models.dtos;
+package com.anghel.music_band_organizer.models.dtos.user;
 
 import com.anghel.music_band_organizer.models.entities.Band;
 import com.anghel.music_band_organizer.models.entities.Message;
@@ -6,13 +6,19 @@ import com.anghel.music_band_organizer.validations.regex.RegexPattern;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Data
 public class UserDTO {
 

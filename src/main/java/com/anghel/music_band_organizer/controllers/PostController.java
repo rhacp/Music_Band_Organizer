@@ -1,6 +1,7 @@
 package com.anghel.music_band_organizer.controllers;
 
-import com.anghel.music_band_organizer.models.dtos.PostDTO;
+import com.anghel.music_band_organizer.models.dtos.post.GetAllPostsDTO;
+import com.anghel.music_band_organizer.models.dtos.post.PostDTO;
 import com.anghel.music_band_organizer.services.post.PostService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +25,7 @@ public class PostController {
     }
 
     @GetMapping
-    public ResponseEntity<List<PostDTO>> getAllPosts() {
+    public ResponseEntity<List<GetAllPostsDTO>> getAllPosts() {
         return ResponseEntity.ok(postService.getAllPosts());
     }
 

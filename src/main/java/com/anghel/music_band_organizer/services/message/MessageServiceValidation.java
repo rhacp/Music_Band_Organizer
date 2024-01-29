@@ -1,6 +1,6 @@
 package com.anghel.music_band_organizer.services.message;
 
-import com.anghel.music_band_organizer.models.dtos.MessageDTO;
+import com.anghel.music_band_organizer.models.dtos.message.MessageDTO;
 import com.anghel.music_band_organizer.models.entities.Message;
 
 public interface MessageServiceValidation {

@@ -1,6 +1,7 @@
 package com.anghel.music_band_organizer.services.rehearsal;
 
-import com.anghel.music_band_organizer.models.dtos.RehearsalDTO;
+import com.anghel.music_band_organizer.models.dtos.rehearsal.GetAllRehearsalsDTO;
+import com.anghel.music_band_organizer.models.dtos.rehearsal.RehearsalDTO;
 
 import java.util.List;
 
@@ -8,7 +9,7 @@ public interface RehearsalService {
 
     RehearsalDTO createRehearsal(RehearsalDTO rehearsalDTO, Long userId, Long bandId);
 
-    List<RehearsalDTO> getAllRehearsals();
+    List<GetAllRehearsalsDTO> getAllRehearsals();
 
     RehearsalDTO getRehearsalById(Long rehearsalId);
 

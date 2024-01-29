@@ -1,4 +1,4 @@
-package com.anghel.music_band_organizer.models.dtos;
+package com.anghel.music_band_organizer.models.dtos.band;
 
 import com.anghel.music_band_organizer.models.entities.Post;
 import com.anghel.music_band_organizer.models.entities.Rehearsal;
