@@ -27,6 +27,7 @@ Music band organizer app.
 * Mockito
 * Gmail SMTP
 * Swagger
+* H2
 
 ---
 
