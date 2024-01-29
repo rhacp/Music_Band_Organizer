@@ -52,3 +52,9 @@ Musicians will be able to find other users, evaluate them based on their past ex
 - possible integration with OpenAI: based on the `band_name`, `band_description` and `post_title`, the AI should be able to provide the band with an automatic basic description for the release;
 
 ---
+
+### Message
+
+- messages should include a feature to get an entire conversation;
+
+---
