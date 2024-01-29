@@ -1,6 +1,6 @@
 # Music Band Organizer
 
-Board regarding the music band organizer Java app.
+Music band organizer app.
 
 * Project diagram:
 [Entities](https://drive.google.com/file/d/1pJo-QXl8MyAoCpR701Aix5HOdSQgTnpu/view?usp=drive_link)
