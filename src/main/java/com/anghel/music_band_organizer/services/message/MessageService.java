@@ -15,5 +15,5 @@ public interface MessageService {
 
     String deleteMessageById(Long rehearsalId);
 
-    List<MessageDTO> getConversationBetweenUsers(Long fromUser, Long toUser);
+    List<GetAllMessagesDTO> getConversationBetweenUsers(Long fromUser, Long toUser);
 }

@@ -37,7 +37,7 @@ public class BandServiceImpl implements BandService{
     @Override
     public BandDTO createBand(BandDTO bandDTO, Long userId) {
         bandServiceValidation.validateBandAlreadyExists(bandDTO);
-        User user = userService.makeUserAdminForCreateBand(userId, bandDTO.getBandName(), "createBand");
+        User user = userService.makeUserOwnerForCreateBand(userId, bandDTO.getBandName(), "createBand");
 
         Band band = modelMapper.map(bandDTO, Band.class);
         band.getUserList().add(user);

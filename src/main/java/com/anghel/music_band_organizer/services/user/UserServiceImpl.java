@@ -113,10 +113,10 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public User makeUserAdminForCreateBand(Long userId, String bandName, String methodName) {
+    public User makeUserOwnerForCreateBand(Long userId, String bandName, String methodName) {
         User user = userServiceValidation.getValidUser(userId, methodName);
 
-        user.getBandRole().put(bandName, Role.ADMIN.getRoleLabel());
+        user.getBandRole().put(bandName, Role.OWNER.getRoleLabel());
         User savedUser = userRepository.save(user);
         log.info("User {} : {} had a new band and role added in db. Method: {}", savedUser.getId(), savedUser.getEmail(), "addUserBandAndRole");
 
@@ -137,7 +137,7 @@ public class UserServiceImpl implements UserService {
         userServiceValidation.validateUserDuplicateException(user, userToAdd);
 
         userServiceValidation.validateUserNotInSpecificBandException(user, band);
-        userServiceValidation.validateUserNotAdminInBandException(user, band);
+        userServiceValidation.validateUserNotOwnerInBandException(user, band);
         userServiceValidation.validateUserAlreadyInSpecificBandException(userToAdd, band);
 
         userToAdd.getBandList().add(band);
@@ -156,7 +156,7 @@ public class UserServiceImpl implements UserService {
         userServiceValidation.validateUserDuplicateException(user, userToChangeRole);
 
         userServiceValidation.validateUserNotInSpecificBandException(user, band);
-        userServiceValidation.validateUserNotAdminInBandException(user, band);
+        userServiceValidation.validateUserNotOwnerInBandException(user, band);
         userServiceValidation.validateUserNotInSpecificBandException(userToChangeRole, band);
 
         userToChangeRole.getBandRole().put(band.getBandName(), Role.ADMIN.getRoleLabel());
@@ -203,7 +203,7 @@ public class UserServiceImpl implements UserService {
         userServiceValidation.validateUserDuplicateException(user, userToChangeRole);
 
         userServiceValidation.validateUserNotInSpecificBandException(user, band);
-        userServiceValidation.validateUserNotAdminInBandException(user, band);
+        userServiceValidation.validateUserNotOwnerInBandException(user, band);
         userServiceValidation.validateUserNotInSpecificBandException(userToChangeRole, band);
 
         userToChangeRole.getBandRole().put(band.getBandName(), Role.MEMBER.getRoleLabel());

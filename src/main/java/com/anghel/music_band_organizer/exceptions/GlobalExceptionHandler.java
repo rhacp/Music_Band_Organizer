@@ -53,8 +53,8 @@ public class GlobalExceptionHandler {
         return getResponse(e, HttpStatus.UNAUTHORIZED);
     }
 
-    @ExceptionHandler(UserNotAdminInBandException.class)
-    public ResponseEntity<Object> handleUserNotAdminInBandException(UserNotAdminInBandException e) {
+    @ExceptionHandler(UserNotSpecificRoleInBandException.class)
+    public ResponseEntity<Object> handleUserNotAdminInBandException(UserNotSpecificRoleInBandException e) {
         log.info("UserNotAdminInBandException thrown.");
         return getResponse(e, HttpStatus.UNAUTHORIZED);
     }

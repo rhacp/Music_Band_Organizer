@@ -52,8 +52,8 @@ public class MessageServiceImpl implements MessageService{
         Message savedMessage = messageRepository.save(message);
         log.info("Message with id {} inserted in db. Method: {}", savedMessage.getId(), "sendMessage");
 
-        Mail mail = mailService.prepareMailMessage(savedMessage.getToUser(), "sendMessage");
-        mailService.sendMail(savedMessage.getToUser().getEmail(), mail, "sendMessage");
+//        Mail mail = mailService.prepareMailMessage(savedMessage.getToUser(), "sendMessage");
+//        mailService.sendMail(savedMessage.getToUser().getEmail(), mail, "sendMessage");
 
         return modelMapper.map(savedMessage, MessageDTO.class);
     }
@@ -89,14 +89,14 @@ public class MessageServiceImpl implements MessageService{
     }
 
     @Override
-    public List<MessageDTO> getConversationBetweenUsers(Long fromUserId, Long toUserId) {
+    public List<GetAllMessagesDTO> getConversationBetweenUsers(Long fromUserId, Long toUserId) {
         User fromUser = userService.getUserForConversation(fromUserId, "getConversationBetweenUsers");
         User toUser = userService.getUserForConversation(toUserId, "getConversationBetweenUsers");
 
         List<Message> messageList = messageRepository.findMessageByFromUserAndToUserOrFromUserAndToUserOrderByMessageDate(fromUser, toUser, toUser, fromUser);
 
         return messageList.stream()
-                .map(element -> modelMapper.map(element, MessageDTO.class))
+                .map(element -> modelMapper.map(element, GetAllMessagesDTO.class))
                 .toList();
     }
 }

@@ -50,11 +50,11 @@ public class UserServiceValidationImpl implements UserServiceValidation {
     @Override
     public void validateUserNotAdminInBandException(User user, Band band) {
         if (!user.getBandRole().containsValue(Role.ADMIN.getRoleLabel())) {
-            throw new UserNotAdminInBandException("User with id " + user.getId() + " not ADMIN in band " + band.getBandName() + ".");
+            throw new UserNotSpecificRoleInBandException("User with id " + user.getId() + " not ADMIN in band " + band.getBandName() + ".");
         }
 
         if (!user.getBandRole().get(band.getBandName()).equals(Role.ADMIN.getRoleLabel())) {
-            throw new UserNotAdminInBandException("User with id " + user.getId() + " not ADMIN in band " + band.getBandName() + ".");
+            throw new UserNotSpecificRoleInBandException("User with id " + user.getId() + " not ADMIN in band " + band.getBandName() + ".");
         }
     }
 
@@ -69,6 +69,17 @@ public class UserServiceValidationImpl implements UserServiceValidation {
     public void validateUserAlreadyInSpecificBandException(User user, Band band) {
         if (user.getBandList().contains(band)) {
             throw new UserAlreadyInSpecificBandException("User with id " + user.getId() + " already member of band " + band.getId() + ".");
+        }
+    }
+
+    @Override
+    public void validateUserNotOwnerInBandException(User user, Band band) {
+        if (!user.getBandRole().containsValue(Role.OWNER.getRoleLabel())) {
+            throw new UserNotSpecificRoleInBandException("User with id " + user.getId() + " not OWNER in band " + band.getBandName() + ".");
+        }
+
+        if (!user.getBandRole().get(band.getBandName()).equals(Role.OWNER.getRoleLabel())) {
+            throw new UserNotSpecificRoleInBandException("User with id " + user.getId() + " not OWNER in band " + band.getBandName() + ".");
         }
     }
 }

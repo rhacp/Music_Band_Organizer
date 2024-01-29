@@ -45,7 +45,7 @@ public class RehearsalServiceImpl implements RehearsalService{
     public RehearsalDTO createRehearsal(RehearsalDTO rehearsalDTO, Long userId, Long bandId) {
         Band band = bandService.getValidBandForCreateRehearsal(bandId, "createRehearsal");
         userService.createRehearsal(userId, "createRehearsal", band);
-        rehearsalServiceValidation.validateRehearsalAlreadyExists(rehearsalDTO);
+        rehearsalServiceValidation.validateRehearsalAlreadyExists(rehearsalDTO, band);
 
         Rehearsal rehearsal = modelMapper.map(rehearsalDTO, Rehearsal.class);
         rehearsal.setRehearsalBand(band);
