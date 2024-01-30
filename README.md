@@ -32,7 +32,7 @@ Music band organizer app.
 
 ### Helpers
 
-PostgreSQL Database Credentials:
+PostgreSQL DB:
 
 ```
 spring.datasource.url=jdbc:postgresql://localhost:5432/DATABASE_NAME
@@ -49,7 +49,7 @@ api.key=API_KEY
 api.model=gpt-3.5-turbo-1106
 ```
 
-Gmail SMTP Credentails:
+Gmail SMTP:
 ```
 # Email
 spring.mail.host=smtp.gmail.com
