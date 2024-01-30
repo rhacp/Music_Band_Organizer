@@ -56,7 +56,7 @@ spring.datasource.password=DATABASE_PASSWORD
 spring.datasource.driver-class-name=org.postgresql.Driver
 ```
 
-Gmail SMTP Credentails:
+OpenAI:
 ```
 # OpenAI
 api.url=https://api.openai.com/v1/chat/completions
@@ -64,7 +64,7 @@ api.key=API_KEY
 api.model=gpt-3.5-turbo-1106
 ```
 
-OpenAI:
+Gmail SMTP Credentails:
 ```
 # Email
 spring.mail.host=smtp.gmail.com
