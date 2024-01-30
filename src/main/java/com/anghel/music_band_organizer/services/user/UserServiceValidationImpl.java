@@ -82,4 +82,15 @@ public class UserServiceValidationImpl implements UserServiceValidation {
             throw new UserNotSpecificRoleInBandException("User with id " + user.getId() + " not OWNER in band " + band.getBandName() + ".");
         }
     }
+
+    @Override
+    public void validateUserNotAdminOrOwnerInBandException(User user, Band band) {
+        if (!user.getBandRole().containsValue(Role.ADMIN.getRoleLabel()) && !user.getBandRole().containsValue(Role.OWNER.getRoleLabel())) {
+            throw new UserNotSpecificRoleInBandException("User with id " + user.getId() + " not ADMIN or OWNER in band " + band.getBandName() + ".");
+        }
+
+        if (!user.getBandRole().get(band.getBandName()).equals(Role.ADMIN.getRoleLabel()) && !user.getBandRole().get(band.getBandName()).equals(Role.OWNER.getRoleLabel())) {
+            throw new UserNotSpecificRoleInBandException("User with id " + user.getId() + " not ADMIN or OWNER in band " + band.getBandName() + ".");
+        }
+    }
 }

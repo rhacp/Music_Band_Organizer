@@ -4,11 +4,17 @@ import com.anghel.music_band_organizer.utils.enums.Availability;
 import com.anghel.music_band_organizer.utils.enums.State;
 import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 @Entity
 @Table(name = "rehearsals")

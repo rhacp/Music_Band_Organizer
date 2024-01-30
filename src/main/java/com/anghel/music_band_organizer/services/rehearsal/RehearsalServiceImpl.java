@@ -44,7 +44,7 @@ public class RehearsalServiceImpl implements RehearsalService{
     @Override
     public RehearsalDTO createRehearsal(RehearsalDTO rehearsalDTO, Long userId, Long bandId) {
         Band band = bandService.getValidBandForCreateRehearsal(bandId, "createRehearsal");
-        userService.createRehearsal(userId, "createRehearsal", band);
+        userService.checkUserForCreateRehearsal(userId, "createRehearsal", band);
         rehearsalServiceValidation.validateRehearsalAlreadyExists(rehearsalDTO, band);
 
         Rehearsal rehearsal = modelMapper.map(rehearsalDTO, Rehearsal.class);
@@ -97,7 +97,7 @@ public class RehearsalServiceImpl implements RehearsalService{
     @Override
     public RehearsalDTO finishRehearsal(Long rehearsalId, Long userId) {
         Rehearsal rehearsal = rehearsalServiceValidation.getValidRehearsal(rehearsalId, "finishRehearsal");
-        userService.finishRehearsal(userId, rehearsal);
+        userService.checkUserForFinishRehearsal(userId, rehearsal, "finishRehearsal");
 
         rehearsal.setRehearsalState(State.DONE);
         Rehearsal savedRehearsal = rehearsalRepository.save(rehearsal);
