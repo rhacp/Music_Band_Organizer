@@ -11,11 +11,5 @@ import java.time.LocalTime;
 @Repository
 public interface RehearsalRepository extends JpaRepository<Rehearsal, Long>, CustomRehearsalRepository {
 
-//    Rehearsal findRehearsalById(Long rehearsalId);
-//
-//    Rehearsal findRehearsalByRehearsalDate(LocalDate rehearsalDate);
-//
-//    Rehearsal findRehearsalByRehearsalTime(LocalTime rehearsalTime);
-
     Rehearsal findRehearsalByRehearsalDateAndRehearsalTimeAndRehearsalBand(LocalDate rehearsalDate, LocalTime rehearsalTime, Band band);
 }

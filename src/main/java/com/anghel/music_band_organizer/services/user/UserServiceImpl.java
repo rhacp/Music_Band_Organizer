@@ -111,21 +111,9 @@ public class UserServiceImpl implements UserService {
         return userDTOList;
     }
 
-    @Transactional
     @Override
-    public User makeUserOwnerForCreateBand(Long userId, String bandName, String methodName) {
+    public void checkUserForFinishRehearsal(Long userId, Rehearsal rehearsal, String methodName) {
         User user = userServiceValidation.getValidUser(userId, methodName);
-
-        user.getBandRole().put(bandName, Role.OWNER.getRoleLabel());
-        User savedUser = userRepository.save(user);
-        log.info("User {} : {} had a new band and role added in db. Method: {}", savedUser.getId(), savedUser.getEmail(), "addUserBandAndRole");
-
-        return savedUser;
-    }
-
-    @Override
-    public void finishRehearsal(Long userId, Rehearsal rehearsal) {
-        User user = userServiceValidation.getValidUser(userId, "finishRehearsal");
         userServiceValidation.validateUserNotInSpecificBandException(user, rehearsal.getRehearsalBand());
     }
 
@@ -167,22 +155,33 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User sendMessage(Long userId, String methodName) {
-        return userServiceValidation.getValidUser(userId,methodName);
+    public void checkUserForCreateRehearsal(Long userId, String methodName, Band band) {
+        User user = userServiceValidation.getValidUser(userId,methodName);
+        userServiceValidation.validateUserNotInSpecificBandException(user, band);
+        userServiceValidation.validateUserNotAdminOrOwnerInBandException(user, band);
     }
 
     @Override
-    public User createRehearsal(Long userId, String methodName, Band band) {
-        User user = userServiceValidation.getValidUser(userId,methodName);
-        userServiceValidation.validateUserNotAdminInBandException(user, band);
-
-        return user;
+    public User sendMessage(Long userId, String methodName) {
+        return userServiceValidation.getValidUser(userId,methodName);
     }
 
     @Override
     public void checkUserInBandForDeletePost(Long userId, Band band, String methodName) {
         User user = userServiceValidation.getValidUser(userId, methodName);
         userServiceValidation.validateUserNotAdminInBandException(user, band);
+    }
+
+    @Transactional
+    @Override
+    public User makeUserOwnerForCreateBand(Long userId, String bandName, String methodName) {
+        User user = userServiceValidation.getValidUser(userId, methodName);
+
+        user.getBandRole().put(bandName, Role.OWNER.getRoleLabel());
+        User savedUser = userRepository.save(user);
+        log.info("User {} : {} had a new band and role added in db. Method: {}", savedUser.getId(), savedUser.getEmail(), "addUserBandAndRole");
+
+        return savedUser;
     }
 
     @Override
@@ -213,6 +212,11 @@ public class UserServiceImpl implements UserService {
         return savedUser;
     }
 
+    /**
+     * Help method for update just the correct fields of user.
+     * @param user existing user
+     * @param userDTO update DTO
+     */
     private void updateUserFromDTO(User user, UserDTO userDTO) {
         if (userDTO.getFirstName() != null) {
             user.setFirstName(userDTO.getFirstName());

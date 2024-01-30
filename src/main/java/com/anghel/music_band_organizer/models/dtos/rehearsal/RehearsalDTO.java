@@ -5,8 +5,14 @@ import com.anghel.music_band_organizer.utils.enums.State;
 import com.anghel.music_band_organizer.validations.availability.EnumAvailabilityPattern;
 import com.anghel.music_band_organizer.validations.regex.RegexPattern;
 import jakarta.validation.constraints.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 public class RehearsalDTO {
 

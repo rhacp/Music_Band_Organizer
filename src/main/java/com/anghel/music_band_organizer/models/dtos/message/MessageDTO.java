@@ -4,8 +4,14 @@ import com.anghel.music_band_organizer.models.entities.User;
 import com.anghel.music_band_organizer.validations.regex.RegexPattern;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 public class MessageDTO {
 

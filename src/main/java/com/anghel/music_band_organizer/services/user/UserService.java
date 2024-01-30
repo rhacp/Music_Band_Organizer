@@ -13,7 +13,7 @@ public interface UserService {
 
     /**
      * Creates a user based on the given userDTO.
-     * @param userDTO
+     * @param userDTO given userDTO
      * @return UserDTO of the saved user
      */
     UserDTO createUser(UserDTO userDTO);
@@ -65,13 +65,13 @@ public interface UserService {
                                    String pastExperience,
                                    String userStageName);
 
-    void finishRehearsal(Long userId, Rehearsal rehearsal);
+    void checkUserForFinishRehearsal(Long userId, Rehearsal rehearsal, String methodName);
 
     User addUserToBand(Long userId, Long userToAddId, Band band, String methodName);
 
     User makeUserAdminInBand(Long userId, Long userToChangeRoleId, Band band, String methodName);
 
-    User createRehearsal(Long userId, String methodName, Band band);
+    void checkUserForCreateRehearsal(Long userId, String methodName, Band band);
 
     User sendMessage(Long userId, String methodName);
 

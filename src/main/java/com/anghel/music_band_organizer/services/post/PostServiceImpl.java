@@ -38,7 +38,7 @@ public class PostServiceImpl implements PostService{
     @Override
     public PostDTO createPost(PostDTO postDTO, Long userId, Long bandId) {
         Band band = bandService.getValidBandForCreateRehearsal(bandId, "createRehearsal");
-        userService.createRehearsal(userId, "createRehearsal", band);
+        userService.checkUserForCreateRehearsal(userId, "createRehearsal", band);
 
         Post post = modelMapper.map(postDTO, Post.class);
         if (Boolean.TRUE.equals(post.getUseOpenAIForDescription()) || postDTO.getPostDescription() == null) {

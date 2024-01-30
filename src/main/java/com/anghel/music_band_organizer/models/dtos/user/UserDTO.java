@@ -16,9 +16,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Data
 public class UserDTO {
 

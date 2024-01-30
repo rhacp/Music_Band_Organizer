@@ -61,4 +61,6 @@ public interface UserServiceValidation {
      * @exception com.anghel.music_band_organizer.exceptions.user.UserNotSpecificRoleInBandException if user not owner in band
      */
     void validateUserNotOwnerInBandException(User user, Band band);
+
+    void validateUserNotAdminOrOwnerInBandException(User user, Band band);
 }
