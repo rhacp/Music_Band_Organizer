@@ -1,13 +1,11 @@
-package com.anghel.music_band_organizer.repository;
+package com.anghel.music_band_organizer.repository.user;
 
 import com.anghel.music_band_organizer.models.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends JpaRepository<User, Long>, CustomUserRepository {
 
-    User findByEmail(String email);
+    User findUserByEmail(String email);
 }

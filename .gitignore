@@ -23,6 +23,7 @@ mvnw
 mvnw.cmd
 .fastRequest
 src/main/resources/application-RHACP.properties
+src/test/resources/application-RHACP.properties
 
 ### NetBeans ###
 /nbproject/private/
