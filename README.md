@@ -30,7 +30,7 @@ Music band organizer app.
 
 ---
 
-This project is a social media platform for musicians. They can create profiles, search for other musicians according to multiple criteria and send each other messages, eventually forming a band.
+This project is meant to be a social platform for musicians. They can create profiles, search for other musicians according to multiple criteria and send each other messages, eventually forming a band.
 
 The band will be an isolated group of musicians. Within it, members will have three roles (OWNER, ADMIN and MEMBER) and will be able to easily plan and organize rehearsals and releases for songs, EPs or albums that will later be seen by the rest of the platform members.
 
@@ -46,7 +46,7 @@ At the same time, users will be notified by email when they are added to a band 
 
 ### Helpers
 
-PostgreSQL Database Credentials:
+PostgreSQL DB:
 
 ```
 spring.datasource.url=jdbc:postgresql://localhost:5432/DATABASE_NAME
@@ -57,15 +57,13 @@ spring.datasource.driver-class-name=org.postgresql.Driver
 
 OpenAI:
 ```
-# OpenAI
 api.url=https://api.openai.com/v1/chat/completions
 api.key=API_KEY
 api.model=gpt-3.5-turbo-1106
 ```
 
-Gmail SMTP Credentails:
+Gmail SMTP:
 ```
-# Email
 spring.mail.host=smtp.gmail.com
 spring.mail.port=587
 spring.mail.username=MAIL_USERNAME
@@ -75,8 +73,6 @@ spring.mail.properties.mail.smtp.starttls.enable=true
 ```
 
 ---
-
-### Project Entities
 
 User:
 - users should be able to create accounts/ profiles with `name`, `description`, `birthday`, `age` and `past experience`;
