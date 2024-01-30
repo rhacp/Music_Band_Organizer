@@ -47,7 +47,7 @@ At the same time, users will be notified by email when they are added to a band 
 
 ### Helpers
 
-PostgreSQL Database Credentials
+PostgreSQL Database Credentials:
 
 ```
 spring.datasource.url=jdbc:postgresql://localhost:5432/DATABASE_NAME
@@ -77,40 +77,29 @@ spring.mail.properties.mail.smtp.starttls.enable=true
 
 ---
 
-### User
+### Project Entities
 
+User:
 - users should be able to create accounts/ profiles with `name`, `description`, `birthday`, `age` and `past experience`;
 - the `past experience` will include pairs of instrument and a short description to represent his current level;
 - the `email` attribute should be unique;
 
----
-
-### Band
-
+Band:
 - users should be able to create bands, then add other members;
 - bands should have a dedicated chat;
 - the `band_name` attribute should be unique;
 
----
-
-### Rehearsal
-
+Rehearsal:
 - users part of a band should be able to plan rehearsals;
 - rehearsals shuold have a band assigned, a starting date and time, a state (`DUE`, `DONE`) and a duration in hours;
 - Rehearsal can be public or private. Other users can see and attend to open rehearsals;
 
----
-
-### Post
-
+Post:
 - user should be able to release their music/ albums in posts that other users will be able to see;
 - posts should include `title` and `description` and they should be linked to a band;
 - possible integration with OpenAI: based on the `band_name`, `band_description` and `post_title`, the AI should be able to provide the band with an automatic basic description for the release;
 
----
-
-### Message
-
+Message:
 - messages should include a feature to get an entire conversation;
 
 ---
