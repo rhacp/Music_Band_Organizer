@@ -45,6 +45,38 @@ At the same time, users will be notified by email when they are added to a band 
 
 ---
 
+### Helpers
+
+PostgreSQL Database Credentials
+
+```
+spring.datasource.url=jdbc:postgresql://localhost:5432/DATABASE_NAME
+spring.datasource.username=DATABASE_USERNAME
+spring.datasource.password=DATABASE_PASSWORD
+spring.datasource.driver-class-name=org.postgresql.Driver
+```
+
+Gmail SMTP Credentails:
+```
+# OpenAI
+api.url=https://api.openai.com/v1/chat/completions
+api.key=API_KEY
+api.model=gpt-3.5-turbo-1106
+```
+
+OpenAI:
+```
+# Email
+spring.mail.host=smtp.gmail.com
+spring.mail.port=587
+spring.mail.username=MAIL_USERNAME
+spring.mail.password=MAIL_PASSWORD
+spring.mail.properties.mail.smtp.auth=true
+spring.mail.properties.mail.smtp.starttls.enable=true
+```
+
+---
+
 ### User
 
 - users should be able to create accounts/ profiles with `name`, `description`, `birthday`, `age` and `past experience`;
