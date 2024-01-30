@@ -16,15 +16,6 @@ public class PostServiceValidationImpl implements PostServiceValidation{
         this.postRepository = postRepository;
     }
 
-//    @Override
-//    public void validatePostAlreadyExists(PostDTO postDTO) {
-//        Post post = postRepository.findPostById(postDTO.getId());
-//
-//        if (post != null) {
-//            throw new PostAlreadyExistsException("A post with the id " + messageDTO.getMessageDate() + " and time " + messageDTO.getMessageTime() + " already exists.");
-//        }
-//    }
-
     @Override
     public Post getValidPost(Long postId, String methodName) {
         Post post = postRepository.findById(postId)
