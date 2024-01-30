@@ -83,7 +83,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserDTO> getFilteredUsers(Long userId,
+    public List<GetAllUsersDTO> getFilteredUsers(Long userId,
                                           String firstName,
                                           String lastName,
                                           String email,
@@ -92,12 +92,12 @@ public class UserServiceImpl implements UserService {
                                           String stageName) {
         if (userId == null && firstName == null && lastName == null && email == null && birthday == null && pastExperience == null && stageName == null) {
             return userRepository.findAll().stream()
-                    .map(user -> modelMapper.map(user, UserDTO.class))
+                    .map(user -> modelMapper.map(user, GetAllUsersDTO.class))
                     .toList();
         }
 
-        List<UserDTO> userDTOList = userRepository.findFilteredUser(userId, firstName, lastName, email, birthday, pastExperience, stageName).stream()
-                .map(user -> modelMapper.map(user, UserDTO.class))
+        List<GetAllUsersDTO> userDTOList = userRepository.findFilteredUser(userId, firstName, lastName, email, birthday, pastExperience, stageName).stream()
+                .map(user -> modelMapper.map(user, GetAllUsersDTO.class))
                 .toList();
         log.info("Filtered user list retrieved from db. Method {}.", "getFilteredUsers");
 

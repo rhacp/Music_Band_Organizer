@@ -57,7 +57,7 @@ public interface UserService {
      * @param userStageName user id for filtering
      * @return List of UserDTO
      */
-    List<UserDTO> getFilteredUsers(Long userId,
+    List<GetAllUsersDTO> getFilteredUsers(Long userId,
                                    String firstName,
                                    String lastName,
                                    String userEmail,
