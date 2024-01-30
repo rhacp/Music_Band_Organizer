@@ -39,7 +39,7 @@ public class UserController {
     }
 
     @GetMapping("/filter")
-    public ResponseEntity<List<UserDTO>> getFilteredUsers(@RequestParam(required = false) Long userId,
+    public ResponseEntity<List<GetAllUsersDTO>> getFilteredUsers(@RequestParam(required = false) Long userId,
                                                           @RequestParam(required = false) String firstName,
                                                           @RequestParam(required = false) String lastName,
                                                           @RequestParam(required = false) String email,
