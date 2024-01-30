@@ -38,7 +38,7 @@ public class GetAllUsersDTO {
     private String description;
 
     @NotBlank
-    @RegexPattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$", message = "Must be of format XXXX-XX-XX and not null.")
+    @RegexPattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$", message = "Must be of format YYYY-MM-DD and not null.")
     private String birthday;
 
     @NotBlank

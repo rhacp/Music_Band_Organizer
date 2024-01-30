@@ -25,11 +25,11 @@ public class GetAllRehearsalsDTO {
     private State state;
 
     @NotBlank
-    @RegexPattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$", message = "Must be of format XXXX-XX-XX and not null.")
+    @RegexPattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$", message = "Must be of format YYYY-MM-DD and not null.")
     private String rehearsalDate;
 
     @NotBlank
-    @RegexPattern(regexp = "([01]?[0-9]|2[0-3]):[0-5][0-9]", message = "Must be of format XX.XX and not null.")
+    @RegexPattern(regexp = "([01]?[0-9]|2[0-3]):[0-5][0-9]", message = "Must be of format HH:MM and not null.")
     private String rehearsalTime;
 
     @NotNull
