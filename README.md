@@ -5,7 +5,7 @@ Music band organizer app.
 * Project diagram:
 [Entities](https://drive.google.com/file/d/1WPOtxxaBruy-SBbvhUmR6CK_qG4J8zhb/view?usp=drive_link)
 [LifeCycle](https://drive.google.com/file/d/1Hnv8ifj1whkHzo0rxHPhc8P9vxFEjMSr/view?usp=drive_link)
-[DBSchema](0https://drive.google.com/file/d/1WoWSwh_CqH6HAWF5D6h2CUL3-RNSc6mM/view?usp=drive_link)
+[DBSchema](https://drive.google.com/file/d/1WoWSwh_CqH6HAWF5D6h2CUL3-RNSc6mM/view?usp=drive_link)
 
 * API Documentation (Swagger):
 [Music Band Organizer API Doccumentation](https://rhacp.github.io/MBO_Swagger/#/)
