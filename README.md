@@ -43,7 +43,6 @@ spring.datasource.driver-class-name=org.postgresql.Driver
 
 OpenAI:
 ```
-# OpenAI
 api.url=https://api.openai.com/v1/chat/completions
 api.key=API_KEY
 api.model=gpt-3.5-turbo-1106
@@ -51,7 +50,6 @@ api.model=gpt-3.5-turbo-1106
 
 Gmail SMTP:
 ```
-# Email
 spring.mail.host=smtp.gmail.com
 spring.mail.port=587
 spring.mail.username=MAIL_USERNAME
